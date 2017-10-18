@@ -1,3 +1,19 @@
 <launch>
-	<include file="$(find joy)/launch/joy_launch.launch"/>
+
+	<!-- Load Earth Rover Hardware Configuration -->
+	<rosparam file="$(find earth_rover)/config/hardware_test.yaml" command="load"/>
+	
+	<!-- Load Earth Rover Description -->
+	<include file="$(find earth_rover_description)/launch/description.launch"/>
+
+	<!-- Robot Hardware Interface -->
+	<node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node"/>	
+
+    <remap from="cmd_vel" to="robot_controller/cmd_vel"/>
+	<!-- Teleoperation and Joystick Nodes -->
+	<include file="$(find teleop_twist_joy)/launch/teleop.launch"/> 
+
+	<!-- Load the controller -->
+	<include file="$(find earth_rover)/launch/earth_rover_controller.launch"/>
+
 </launch>
