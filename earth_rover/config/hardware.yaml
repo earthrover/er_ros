@@ -1,16 +1,15 @@
 earth_rover_hardware:
  conversion_factor: 1000
  joints:
-   # wrong
-   #front_left_drive_wheel        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94WBW6-if00-port0
-   #	front_left_steering:
-   #front_right_drive_wheel       : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQG2-if00-port0 
-   #	front_right_steering:
+  # Wheel Joints
+    front_left_wheel_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TTY4-if00-port0
+    front_right_wheel_joint       : /dev/serial/by-id/usb-FTDI_TTL232R_FT94WBW6-if00-port0
+    back_left_wheel_joint         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQCD-if00-port0
+    back_right_wheel_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQG2-if00-port0
 
-   # Correct
-   back_left_drive_wheel         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TTY4-if00-port0
-   # back_left_steering            : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQCD-if00-port0
+  # Ankle Joints
+    #front_left_ankle_motor        : /dev/serial/by-id/
+    #front_right_ankle_motor       : /dev/serial/by-id/
+    back_left_ankle_motor         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TRQB-if00-port0
+    #back_right_ankle_motor        : /dev/serial/by-id/
 
-   # wrong
-   #back_right_drive_wheel        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQCD-if00-port0
-   #	back_right_steering:

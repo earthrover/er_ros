@@ -1,19 +1,30 @@
 <launch>
 
 	<!-- Load Earth Rover Hardware Configuration -->
-	<rosparam file="$(find earth_rover)/config/hardware_test.yaml" command="load"/>
-	
+	<rosparam file="$(find earth_rover)/config/hardware_skid.yaml" command="load"/>
+
+	<include file="$(find ankle_publisher)/launch/ankle_publisher_launch.launch"/>
+
+
 	<!-- Load Earth Rover Description -->
 	<include file="$(find earth_rover_description)/launch/description.launch"/>
 
 	<!-- Robot Hardware Interface -->
-	<node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node"/>	
+	<node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node" output="screen"/>	
 
-    <remap from="cmd_vel" to="robot_controller/cmd_vel"/>
+    <remap from="cmd_vel" to="skid_controller/cmd_vel"/>
+
 	<!-- Teleoperation and Joystick Nodes -->
-	<include file="$(find teleop_twist_joy)/launch/teleop.launch"/> 
+	<include file="$(find teleop_twist_joy)/launch/teleop.launch">
+       <arg name="config_filepath" value="$(find earth_rover)/config/earth_rover_teleop_config.yaml"/>
+    </include> 
+
+	<!-- Load choice of controller -->
+	
+
+	<rosparam file="$(find earth_rover)/config/earth_rover_control.yaml" command="load"/>
 
 	<!-- Load the controller -->
-	<include file="$(find earth_rover)/launch/earth_rover_controller.launch"/>
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" args="skid_controller joint_state_controller ankle_mock_controller --shutdown-timeout 3"/>
 
 </launch>

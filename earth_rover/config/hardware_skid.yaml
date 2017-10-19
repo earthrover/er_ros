@@ -1,0 +1,14 @@
+earth_rover_hardware:
+ conversion_factor: 1450
+ joints:
+  # Wheel Joints
+    front_left_wheel_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQG2-if00-port0
+    front_right_wheel_joint       : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQCD-if00-port0
+    back_left_wheel_joint         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TTY4-if00-port0
+    back_right_wheel_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94WBW6-if00-port0
+
+  # Ankle Joints
+    front_left_ankle_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94UZEO-if00-port0
+    front_right_ankle_joint       : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TRQB-if00-port0
+    back_left_ankle_joint         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TM0C-if00-port0
+    back_right_ankle_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TJTK-if00-port0

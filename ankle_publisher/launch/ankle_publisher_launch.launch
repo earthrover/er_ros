@@ -1,0 +1,6 @@
+<launch>
+
+    <node name="ankle_publisher" pkg="ankle_publisher" type="ankle_publisher_node.py"/>
+
+</launch>
+
