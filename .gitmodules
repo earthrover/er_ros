@@ -15,3 +15,6 @@
 	url = git@github.com:wjwwood/serial.git
 
 
+[submodule "ublox"]
+	path = ublox
+	url = git@github.com:earthrover/ublox.git
