@@ -2,14 +2,14 @@ earth_rover_hardware:
  conversion_factor: 1000
  joints:
   # Wheel Joints
-    front_left_wheel_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TTY4-if00-port0
-    front_right_wheel_joint       : /dev/serial/by-id/usb-FTDI_TTL232R_FT94WBW6-if00-port0
-    back_left_wheel_joint         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQCD-if00-port0
-    back_right_wheel_joint        : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TQG2-if00-port0
+    front_left_wheel_joint        : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00058128-if00
+    front_right_wheel_joint       : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00140203-if00
+    back_left_wheel_joint         : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00201225-if00
+    back_right_wheel_joint        : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203324-if00
 
   # Ankle Joints
-    #front_left_ankle_motor        : /dev/serial/by-id/
-    #front_right_ankle_motor       : /dev/serial/by-id/
-    back_left_ankle_motor         : /dev/serial/by-id/usb-FTDI_TTL232R_FT94TRQB-if00-port0
-    #back_right_ankle_motor        : /dev/serial/by-id/
+    #front_left_ankle_motor        : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203338-if00
+    #front_right_ankle_motor       : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203356-if00
+    back_left_ankle_motor          : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203384-if00
+    #back_right_ankle_motor        : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203390-if00
 
