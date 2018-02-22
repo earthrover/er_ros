@@ -21,3 +21,12 @@
 [submodule "zed-ros-wrapper"]
 	path = zed-ros-wrapper
 	url = git@github.com:earthrover/zed-ros-wrapper.git
+[submodule "four_wheel_steering_msgs"]
+	path = four_wheel_steering_msgs
+	url = git@github.com:ros-drivers/four_wheel_steering_msgs.git
+[submodule "urdf_geometry_parser"]
+	path = urdf_geometry_parser
+	url = git@github.com:ros-controls/urdf_geometry_parser.git
+[submodule "control_toolbox"]
+	path = control_toolbox
+	url = git@github.com:ros-controls/control_toolbox.git
