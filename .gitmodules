@@ -3,7 +3,7 @@
 	url = git@github.com:RALSpaceASG/earth_rover_description.git
 [submodule "jrk_hardware"]
 	path = jrk_hardware
-	url = git@github.com:RALSpaceASG/jrk_hardware.git
+	url = git@github.com:sergioamr/jrk_hardware.git
 [submodule "teleop_twist_joy"]
 	path = teleop_twist_joy
 	url = git@github.com:RALSpaceASG/teleop_twist_joy.git
