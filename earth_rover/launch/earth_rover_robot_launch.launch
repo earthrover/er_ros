@@ -1,33 +1,53 @@
 <launch>
 
-	<!-- Load Earth Rover Hardware Configuration -->
-	<rosparam file="$(find earth_rover)/config/hardware_skid.yaml" command="load"/>
+  <!-- Load Earth Rover Hardware Configuration -->
+  <rosparam file="$(find earth_rover)/config/hardware_skid.yaml" command="load"/>
 
-	<include file="$(find ankle_publisher)/launch/ankle_publisher_launch.launch"/>
+  <include file="$(find ankle_publisher)/launch/ankle_publisher_launch.launch"/>
 
+  <!-- Load Earth Rover Description -->
+  <include file="$(find earth_rover_description)/launch/description.launch"/>
 
-	<!-- Load Earth Rover Description -->
-	<include file="$(find earth_rover_description)/launch/description.launch"/>
+  <!-- Robot Hardware Interface -->
+  <node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node" output="screen"/>
 
-	<!-- Robot Hardware Interface -->
-	<node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node" output="screen"/>
+  <remap from="cmd_vel" to="skid_controller/cmd_vel"/>
 
-    <remap from="cmd_vel" to="skid_controller/cmd_vel"/>
+  <!-- Teleoperation and Joystick Nodes -->
+  <include file="$(find teleop_twist_joy)/launch/teleop.launch">
+    <arg name="config_filepath" value="$(find earth_rover)/config/earth_rover_teleop_config.yaml"/>
+  </include>
 
-	<!-- Teleoperation and Joystick Nodes -->
-	<include file="$(find teleop_twist_joy)/launch/teleop.launch">
-       <arg name="config_filepath" value="$(find earth_rover)/config/earth_rover_teleop_config.yaml"/>
-    </include>
+  <!-- Load choice of controller -->
+  <rosparam file="$(find earth_rover)/config/earth_rover_control.yaml" command="load"/>
 
-	<!-- Load choice of controller -->
+  <include file="$(find four_wheel_steering_controller)/launch/four_wheel_steering_controller_4ws_cmd.launch"/>
 
+  <!-- Load the controller -->
+  <node name="controller_spawner_test" pkg="controller_manager" type="spawner" args="joint_state_controller four_wheel_steering_controller --shutdown-timeout 3"/>
 
-	<rosparam file="$(find earth_rover)/config/earth_rover_control.yaml" command="load"/>
+  <!-- rqt_plot monitoring -->
+  <node name="four_wheel_steering_cmd_monitor"
+      pkg="rqt_plot"
+      type="rqt_plot"
+      args="/four_wheel_steering_controller/cmd_vel/linear" />
 
-	<!-- Load the controller
+  <node name="four_wheel_steering_4ws_cmd_monitor"
+        pkg="rqt_plot"
+        type="rqt_plot"
+        args="/four_wheel_steering_controller/cmd_four_wheel_steering" />
 
-  node name="controller_spawner" pkg="controller_manager" type="spawner" args="skid_controller joint_state_controller ankle_mock_controller shutdown-timeout 3
+  <node name="four_wheel_steering_pos_monitor"
+        pkg="rqt_plot"
+        type="rqt_plot"
+        args="/four_wheel_steering_controller/odom/pose/pose/position/x" />
+
+  <node name="four_wheel_steering_vel_monitor"
+        pkg="rqt_plot"
+        type="rqt_plot"
+        args="/four_wheel_steering_controller/odom/twist/twist/linear/x" />
+  <!--
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find four_wheel_steering_controller)/test/config/view_odom.rviz"/>
   -->
-	<node name="controller_spawner" pkg="controller_manager" type="spawner" args="skid_controller joint_state_controller --shutdown-timeout 3"/>
 
 </launch>

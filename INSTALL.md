@@ -21,6 +21,15 @@ See [ros_control](http://wiki.ros.org/ros_control) and [ros_controllers](http://
 **"ros_control: A generic and simple control framework for ROS"**,
 The Journal of Open Source Software, 2017. ([PDF](http://www.theoj.org/joss-papers/joss.00456/10.21105.joss.00456.pdf))
 
+# Controllers
+
+Four wheel controller requirements
+```
+sudo apt-get -y install libevent-pthreads-2.0-5
+sudo apt-get -y install python-pthreading
+```
+
+
 ### Playstation 3 Controller for teleop
 
 At syslog there might be:

@@ -1,6 +1,6 @@
 [submodule "earth_rover_description"]
 	path = earth_rover_description
-	url = git@github.com:RALSpaceASG/earth_rover_description.git
+	url = git@github.com:earthrover/earth_rover_description.git
 [submodule "jrk_hardware"]
 	path = jrk_hardware
 	url = git@github.com:sergioamr/jrk_hardware.git
