@@ -1,1 +1,11 @@
 .idea/
+
+*/CMakeFiles/
+*/catkin_generated/
+
+ankle_publisher/Makefile
+
+*/CTestTestfile.cmake
+*/cmake_install.cmake
+
+earth_rover/Makefile
