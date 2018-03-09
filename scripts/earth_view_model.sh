@@ -1,0 +1,1 @@
+roslaunch earth_rover_description view_model.launch 
