@@ -1,0 +1,12 @@
+<launch>
+
+	<rosparam file="$(find earth_rover)/config/earth_rover_4w_control.yaml" command="load"/>
+	
+	<!-- Load the controllers -->
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" args="four_wheel_steering_controller robot_joint_publisher --shutdown-timeout 3"/>
+	
+	<!-- Convert joint states to TF transforms -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen">
+	    <remap from="/joint_states" to="/earth_rover/joint_states" />
+	</node>
+</launch>
