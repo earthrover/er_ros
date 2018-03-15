@@ -8,4 +8,5 @@ ankle_publisher/Makefile
 */CTestTestfile.cmake
 */cmake_install.cmake
 
+four_wheel_steering_controller/Makefile
 earth_rover/Makefile
