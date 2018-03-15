@@ -40,6 +40,9 @@ Documentation and code to our ROS instance of Earth Rover into our UGV
 
 ### ROS Install
 
+[Installation manual](https://github.com/earthrover/earth-rover-ros/blob/master/INSTALL.md)
+
+
 ### LICENSE
 Check our LICENSE file. 
 Some folders on this repo were built with BSD-3 license by RAL Space.
