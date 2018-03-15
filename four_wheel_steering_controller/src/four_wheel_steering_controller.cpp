@@ -63,7 +63,6 @@ namespace four_wheel_steering_controller{
 	{
 
 		printf("----------- FourWheelSteeringController::init RobotHW 0x%p -------------\n", robot_hw);
-		printf("------------- ControllerManager 0x%p -------------------\n", &controller_nh);
 
 		const std::string complete_ns = controller_nh.getNamespace();
 		std::size_t id = complete_ns.find_last_of("/");
