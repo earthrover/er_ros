@@ -1,8 +1,8 @@
-# Install script for directory: /home/nvidia/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller
+# Install script for directory: /home/earth/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "/home/earth/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,18 +33,18 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/nvidia/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/catkin_generated/installspace/four_wheel_steering_controller.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/earth/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/catkin_generated/installspace/four_wheel_steering_controller.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/four_wheel_steering_controller/cmake" TYPE FILE FILES
-    "/home/nvidia/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/catkin_generated/installspace/four_wheel_steering_controllerConfig.cmake"
-    "/home/nvidia/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/catkin_generated/installspace/four_wheel_steering_controllerConfig-version.cmake"
+    "/home/earth/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/catkin_generated/installspace/four_wheel_steering_controllerConfig.cmake"
+    "/home/earth/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/catkin_generated/installspace/four_wheel_steering_controllerConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/four_wheel_steering_controller" TYPE FILE FILES "/home/nvidia/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/four_wheel_steering_controller" TYPE FILE FILES "/home/earth/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/package.xml")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -54,12 +54,12 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfour_wheel_steering_controller.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/nvidia/catkin_ws/src/devel/lib/libfour_wheel_steering_controller.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/earth/catkin_ws/devel/lib/libfour_wheel_steering_controller.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfour_wheel_steering_controller.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfour_wheel_steering_controller.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfour_wheel_steering_controller.so"
-         OLD_RPATH "/opt/ros/kinetic/lib:/home/nvidia/catkin_ws/src/devel/lib:"
+         OLD_RPATH "/home/earth/catkin_ws/devel/lib:/opt/ros/kinetic/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfour_wheel_steering_controller.so")
@@ -68,6 +68,6 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/four_wheel_steering_controller" TYPE FILE FILES "/home/nvidia/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/four_wheel_steering_controller_plugins.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/four_wheel_steering_controller" TYPE FILE FILES "/home/earth/catkin_ws/src/earth-rover-ros/four_wheel_steering_controller/four_wheel_steering_controller_plugins.xml")
 endif()
 
