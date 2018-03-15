@@ -34,6 +34,22 @@ sudo apt-get clean
 sudo apt-get autoremove
 ```
 
+###### Remove modem manager since we need the ACM and USB access
+```
+sudo apt-get -y remove modemmanager
+```
+
+###### Add user to dial up 
+```
+sudo usermod -a -G dialout $USER
+```
+Log out to get the group assigned
+
+```
+earth@earth-pi-ros:~$ groups
+earth adm dialout cdrom sudo dip video plugdev input lpadmin sambashare spi i2c gpio
+```
+
 GIT
 ----------------------------
 
@@ -376,7 +392,9 @@ cd ~/catkin_ws
 ```
 
 ###### Create a sym link to scripts to speed up access to launchers
+```
 ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s scripts
+```
 
 #### White list all the packages
 ```
