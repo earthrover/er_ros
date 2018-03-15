@@ -378,6 +378,12 @@ cd ~/catkin_ws
 ###### Create a sym link to scripts to speed up access to launchers
 ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s scripts
 
+#### White list all the packages
+```
+cd ~/catkin_ws
+catkin_make -DCATKIN_WHITELIST_PACKAGES="" -j1
+```
+
 #### Build workspace
 ```
 earth@earth-pi-ros:~/catkin_ws$ catkin_make -j1

@@ -38,6 +38,8 @@ EARTH ROVER CHEAT SHEET
 
 Useful commands to run and debug
 
+### [Ros Cheat Sheet](https://github.com/ros/cheatsheet/releases)
+
 ### General 
 
 * Version release of the Jetpack installed
@@ -101,4 +103,14 @@ re-run the profile with --zombie-only
 0.000417 * /home/nvidia/catkin_ws/src/devel/share/roseus/ros
 0.000399 * /home/nvidia/catkin_ws/src/devel/share/gennodejs/ros
 0.000371 * /opt/ros/kinetic/share/OpenCV-3.3.1
+```
+
+Whitelist all the packages so you can build your entire workspace
+```
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""
+```
+
+Build with debug output
+```
+catkin_make -DCMAKE_VERBOSE_MAKEFILE=ON
 ```
