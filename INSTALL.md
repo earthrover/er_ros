@@ -389,7 +389,9 @@ catkin_make -j1
 ```
 
 #### Check with rospack if we can build our packages 
+```
 rospack profile
+```
 
 Troubleshooting
 ---------------------------
