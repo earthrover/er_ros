@@ -1,6 +1,6 @@
-robot_joint_publisher:
-  type: "joint_state_controller/JointStateController"
-  publish_rate: 50
+# robot_joint_publisher:
+#  type: "joint_state_controller/JointStateController"
+#  publish_rate: 50
 # Four Wheel Steering
 four_wheel_steering_controller:
     type: "four_wheel_steering_controller/FourWheelSteeringController"
@@ -18,5 +18,5 @@ four_wheel_steering_controller:
 
     # Odometry fused with IMU is published by robot_localization, so
     # no need to publish a TF based on encoders alone.
-    enable_odom_tf: false
+    enable_odom_tf: true
 
