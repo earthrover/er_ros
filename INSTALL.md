@@ -24,6 +24,12 @@ sudo service ssh status
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 ```
 
+###### Shutdown 
+Disable printer services
+```
+sudo systemctl disable cups-browsed.service
+```
+
 ###### Remove all libre office
 
 ```
