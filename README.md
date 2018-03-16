@@ -42,6 +42,8 @@ Documentation and code to our ROS instance of Earth Rover into our UGV
 
 [Installation manual](https://github.com/earthrover/earth-rover-ros/blob/master/INSTALL.md)
 
+### ROS Run the project
+[How to run (TODO)](https://github.com/earthrover/earth-rover-ros/blob/master/RUN.md)
 
 ### LICENSE
 Check our LICENSE file. 
