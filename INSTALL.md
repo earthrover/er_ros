@@ -19,6 +19,14 @@ sudo service ssh start
 sudo service ssh status
 ```
 
+#### Install screen
+We use screen to launch processes and have access to their terminals
+later on
+
+```
+sudo apt-get -y install screen
+```
+
 ###### Remove Splash from grub 
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
@@ -131,6 +139,46 @@ Four wheel controller requirements
 sudo apt-get -y install libevent-pthreads-2.0-5
 sudo apt-get -y install python-pthreading
 ```
+
+Service starter
+------------------------
+
+
+```
+earth@earth-pi-ros:~$ sudo vim /etc/init.d/ros_earth_rover
+```
+
+We create a launch file to init the service in a screen
+```
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides: ros_earth_rover
+# Required-Start: $network
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: ensure ros daemons are started (nmbd and smbd)
+### END INIT INFO
+
+case $1 in
+     start)
+       su - earth -c "screen -dmS ROS bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_all.sh"
+       ;;
+     stop)
+        kill -s 15 `pidof screen`
+        ;;
+esac
+exit 0
+```
+
+Execute and enable service
+```
+sudo chmod +x /etc/init.d/ros_earth_rover
+sudo systemctl enable ros_earth_rover
+```
+
+
 
 Development tools
 ------------------------
