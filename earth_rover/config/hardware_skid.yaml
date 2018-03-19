@@ -9,6 +9,6 @@ earth_rover_hardware:
 
   # Ankle Joints
     front_left_steering_joint     : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00201225-if00
-    front_right_steering_joint    : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00058138-if00
+    front_right_steering_joint    : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00104525-if00
     back_left_steering_joint      : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00155898-if00
     back_right_steering_joint     : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203356-if00
