@@ -426,6 +426,16 @@ rospack profile
 Troubleshooting
 ---------------------------
 
+* Joystick connects as player 2
+
+If your joystick is connected as player 2, it means it is mounted as /dev/input/js1
+We have to modify our modules to be able to find the remote controller properly
+
+The list of handlers of joysticks are here:
+cat /proc/bus/input/devices
+
+We will have to parse later on and create on the fly or search for the joystick.
+
 * Failed to load Kernel modules
 ```
 https://askubuntu.com/questions/779251/what-to-do-after-failed-to-start-load-kernel-modules
