@@ -17,7 +17,7 @@ class SteeringTransform(object):
         self.every_nanos = 100000000
         
         
-        self.velocity_scale = 1
+        self.velocity_scale = 0.5
         self.crab_scale = 0.7
         self.turn_scale = 0.7
         self.velocity_boost = 3
@@ -39,21 +39,25 @@ class SteeringTransform(object):
         
     def get_velocity(self, joy):
     
-        velocity = joy.axes[3]/float(self.velocity_scale)
-        if joy.buttons[9] > 0:
-            velocity = velocity * self.velocity_boost
+        velocity = -(joy.axes[13] - 1) * float(self.velocity_scale)
+        if velocity == 0.5:
+            velocity = 0.0
+        
+        if joy.axes[12] != 0 and joy.axes[12] < 1 :
+            velocity = (joy.axes[12] - 1) * float(self.velocity_scale)
+            
         return velocity
     	
     
     def get_crab(self, joy):
     
-        crab = joy.axes[2]/float(self.crab_scale)
+        crab = joy.axes[0]/float(self.crab_scale)
         return crab
         
         
     def get_turn(self, joy):
     
-        turn = joy.axes[0]/float(self.turn_scale)
+        turn = joy.axes[2]/float(self.turn_scale)
         return turn
         
         
