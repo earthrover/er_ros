@@ -18,6 +18,7 @@ base2steering::base2steering() {
 	_cmd_vel_sub = _nh.subscribe("/cmd_vel", 0, &base2steering::cmd_vel_cb, this);
 	
 	load_param( _delta_max, 0.8, "delta_max");
+	load_param( _wheelbase, 1.0, "wheelbase");
 
 	_4ws_vel = _nh.advertise<four_wheel_steering_msgs::FourWheelSteering>("/four_wheel_steering_controller/cmd_four_wheel_steering", 0);
 	_x_vel = _t_vel = 0.0;
@@ -53,7 +54,7 @@ void base2steering::fws_ctrl() {
 	while(ros::ok()) {
 		
 		fws_ctrl_msg.speed = _x_vel;
-		float delta = domega_to_delta( _x_vel, _t_vel, 1.0 );
+		float delta = domega_to_delta( _x_vel, _t_vel, _wheelbase );
 		delta = ( fabs(delta) > _delta_max ) ? ( delta < 0 ) ? -_delta_max : _delta_max : delta;
 		
 		fws_ctrl_msg.front_steering_angle = delta;
