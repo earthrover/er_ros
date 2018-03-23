@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<launch>
+	<!-- these are the arguments for gazebo, for example paused:=true -->
+	<arg name="paused" default="false"/>
+	<arg name="use_sim_time" default="true"/>
+	<arg name="gui" default="true"/>
+	<arg name="headless" default="false"/>
+	<arg name="debug" default="false"/>
+
+	<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<!-- <arg name="world_name" value="worlds/road.world" /> -->
+		<arg name="debug" value="$(arg debug)" />
+		<arg name="gui" value="$(arg gui)" />
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+		<arg name="headless" value="$(arg headless)"/>
+	</include>
+
+	<include file="$(find earth_rover_description)/launch/gazebo_spawn_with_sensors.launch" />
+</launch>

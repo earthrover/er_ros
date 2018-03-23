@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:property name="base_x" value=".2148" />
+	<xacro:property name="base_y" value=".106" />
+	<xacro:property name="base_z" value=".142" />
+
+	<xacro:property name="shoulder_x" value=".109" />
+	<xacro:property name="shoulder_y" value=".26" />
+
+	<xacro:property name="hinge_offset" value=".029" />
+
+	<xacro:macro name="base_block" params="name parent reflect colour">
+		<link name="${name}_link">
+			<inertial>
+				<!-- from solid edge base_block.asm -->
+				<origin xyz="0.01925 0 -0.00534" />
+				<mass value="1.072" />
+				<inertia ixx="0.008" iyy="0.011" izz="0.013" ixy="0.000" ixz="0.000" iyz="0.000" />
+			</inertial>
+			<visual>
+				<origin rpy="0 0 ${M_PI if reflect == -1 else 0}" />
+				<geometry>
+					<mesh filename="package://earth_rover_description/meshes/base_block.dae" />
+				</geometry>
+				<material name="${colour}" />
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${base_x} ${base_y} ${base_z}" />
+				</geometry>
+			</collision>
+			<collision>
+				<origin xyz="${reflect*(base_x/2 - shoulder_x/2)} 0 0" />
+				<geometry>
+					<box size="${shoulder_x} ${shoulder_y} ${base_z}" />
+				</geometry>
+			</collision>
+			<collision>
+				<!-- handle -->
+				<origin xyz="${reflect*(base_x/2 + 0.015)} 0 -.06" />
+				<geometry>
+					<box size=".03 .128 .01" />
+				</geometry>
+			</collision>
+		</link>
+
+		<gazebo reference="${name}_link">
+			<selfCollide>false</selfCollide>
+		</gazebo>
+
+		<!-- in real life the hinge is continuous
+		     however, because we have no jointState information
+		     from the hinge (no sensors), having this joint
+		     as movable causes the TF tree to be disconnected -->
+<!-- 	<joint name="${name}_hinge" type="continuous"> -->
+		<joint name="${name}_hinge" type="fixed">
+			<parent link="${parent}" />
+			<child link="${name}_link" />
+			<!-- <axis xyz="1 0 0" /> -->
+			<origin xyz="${reflect*base_x/2} 0 ${hinge_offset}" />
+			<!-- <dynamics damping="1.0" friction="1.0" /> -->
+		</joint>
+	</xacro:macro>
+
+</robot>

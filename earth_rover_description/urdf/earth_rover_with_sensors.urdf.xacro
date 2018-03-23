@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="earth_rover">
+
+	<xacro:property name="M_PI" value="3.1415926535897931" />
+
+	<!-- measured mass of tyre and hub outer part: 1.238g -->
+	<!-- measured mass of base block and two steering blocks: 1550 g -->
+	<!-- measured mass of battery block: 2401 g -->
+	<!-- measured mass of ankle motor: 208 g -->
+
+	<material name="yellow">
+		<color rgba=".8 .8 0 1" />
+	</material>
+
+	<material name="black">
+		<color rgba="0 0 0 1" />
+	</material>
+
+	<material name="green">
+		<color rgba="0 0.8 0 1" />
+	</material>
+
+	<material name="silver">
+		<color rgba=".8 .8 .8 1" />
+	</material>
+
+  <xacro:include filename="base.urdf.xacro" />
+  <xacro:include filename="wheels.urdf.xacro" />
+
+  <!-- link of convenience, makes things more symmetrical -->
+	<link name="base_link"/>
+
+	<!-- gazebo doesn't recognise links without mass, but KDL doesn't
+	     like the ba link to have inertia, so we have this silly
+	     situation of a dummy inertia link for a dummy link... -->
+	<link name="base_link_inertia">
+		<inertial>
+			<!-- mass needed for gazebo to recognise link -->
+			<mass value="1000.00" />
+			<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+		</inertial>
+	</link>
+
+	<joint name="base_link_inertia_joint" type="fixed">
+		<parent link="base_link" />
+		<child link="base_link_inertia" />
+	</joint>
+
+	<base_block name="front_base" parent="base_link" reflect="1" colour="yellow" />
+	<base_block name="back_base" parent="base_link" reflect="-1" colour="yellow" />
+
+	<xacro:wheel name="front_left" parent="front_base_link" reflect="1" reflect_y="1" />
+	<xacro:wheel name="front_right" parent="front_base_link" reflect="-1" reflect_y="1" />
+	<xacro:wheel name="back_left" parent="back_base_link" reflect="1" reflect_y="-1" />
+	<xacro:wheel name="back_right" parent="back_base_link" reflect="-1" reflect_y="-1" />
+
+	<!-- battery block -->
+	<link name="battery_block_link">
+		<inertial>
+			<!-- from Solid Edge "Battery Block V2 - 22Ah - 24V.asm" -->
+			<origin xyz="-0.09568 0 0.00658" />
+			<mass value="2.401" />
+			<inertia ixx="0.002" iyy="-0.001" izz="-0.001" ixy="0" ixz="0" iyz="0" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="package://earth_rover_description/meshes/battery_block.dae" />
+			</geometry>
+		</visual>
+	</link>
+
+	<gazebo reference="battery_block_link">
+		<selfCollide>false</selfCollide>
+	</gazebo>
+
+	<joint name="battery_block_joint" type="fixed">
+		<parent link="front_base_link" />
+		<child link="battery_block_link" />
+		<origin xyz="${base_x/2} 0 0" />
+	</joint>
+
+  <xacro:include filename="$(find sensor_sim_gazebo)/urdf/sensor.xacro"/>
+
+  <gazebo>
+      <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
+          <updateRate>4.0</updateRate>
+          <bodyName>sensor</bodyName>
+          <frameId>base_link</frameId>
+          <topicName>/gps/fix</topicName>
+          <velocityTopicName>/gps/fix_velocity</velocityTopicName>
+          <referenceLatitude>-30.06022459407145675</referenceLatitude>
+          <referenceLongitude>-51.173913575780311191</referenceLongitude>
+          <referenceHeading>90</referenceHeading>
+          <referenceAltitude>10</referenceAltitude>
+          <offset>0 0 0</offset>
+          <drift>0.001 0.001 0.001</drift>
+          <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
+          <velocityDrift>0.001 0.001 0.001</velocityDrift>
+          <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
+      </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>sensor</bodyName>
+      <topicName>imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>20.0</updateRate>
+    </plugin>
+  </gazebo>
+
+	<!-- gazebo tags -->
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/</robotNamespace>
+		</plugin>
+	</gazebo>
+
+</robot>

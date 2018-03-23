@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>earth_rover_description</name>
+  <version>1.0.0</version>
+  <description>URDF and Collada models for the earthrover</description>
+
+  <maintainer email="laurence.de-bruxelles@ac.uk">Laurence de Bruxelles</maintainer>
+
+  <license>BSD</license>
+
+  <!-- Url tags are optional, but mutiple are allowed, one per tag -->
+  <!-- Optional attribute type can be: website, bugtracker, or repository -->
+  <!-- Example: -->
+  <!-- <url type="website">http://wiki.ros.org/earth_rover_description</url> -->
+
+  <!-- Author tags are optional, mutiple are allowed, one per tag -->
+  <!-- Authors do not have to be maintianers, but could be -->
+  <!-- Example: -->
+  <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>linckia</run_depend>
+</package>

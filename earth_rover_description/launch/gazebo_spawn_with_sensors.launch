@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+	<include file="$(find earth_rover_description)/launch/description_with_sensors.launch" />
+	
+	<!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+	<node name="spawn_earth_rover_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -model earth_rover -param robot_description -z 0"/>
+</launch>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+
+
+	<param name="robot_description" command="xacro $(find earth_rover_description)/urdf/earth_rover_with_sensors.urdf.xacro"/>
+<rosparam file="$(find earth_rover)/config/earth_rover_4w_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/" args="four_wheel_steering_controller"/>
+
+
+<!--	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
+</launch>
