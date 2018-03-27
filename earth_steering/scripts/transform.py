@@ -45,7 +45,7 @@ class SteeringTransform(object):
         
         if joy.axes[12] != 0 and joy.axes[12] < 1 :
             velocity = (joy.axes[12] - 1) * float(self.velocity_scale)
-            
+        rospy.loginfo("velocity: %s" % velocity)
         return velocity
     	
     
