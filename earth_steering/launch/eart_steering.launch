@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 
 <launch>
+<!-- Load the joystick -->
 
-  <!-- Load the joystick -->
   <arg name="joy_config" default="ps3" />
-  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_dev" default="/dev/input/js4" />
   
   <node pkg="joy" type="joy_node" name="joy_node">
     <param name="dev" value="$(arg joy_dev)" />
@@ -15,9 +15,9 @@
 	<node pkg="earth_steering" name="joy2cmd_vel" type="joy2cmd_vel" output="screen">
 	</node>
 
-	
-	<node pkg="earth_steering" name="base2steering" type="base2steering" output="screen">
-		<param name="wheelbase" type="double" value="0.5" />
+  <node pkg="earth_steering" name="base2steering" type="base2steering" output="screen">
+		<param name="wheelbase" type="double" value="0.44" />
+		<param name="delta_max" type="double" value="0.4" />
 	
 	</node>
 	
