@@ -28,16 +28,21 @@
   <xacro:include filename="wheels.urdf.xacro" />
 
   <!-- link of convenience, makes things more symmetrical -->
-	<link name="base_link"/>
+	<link name="base_link" >
+		<inertial>
+			<!-- mass needed for gazebo to recognise link -->
+			<mass value="1" />
+			<inertia ixx="0" iyy="0" izz="0" ixy="0" ixz="0" iyz="0" />
+		</inertial>
+	</link>
 
 	<!-- gazebo doesn't recognise links without mass, but KDL doesn't
 	     like the ba link to have inertia, so we have this silly
 	     situation of a dummy inertia link for a dummy link... -->
 	<link name="base_link_inertia">
 		<inertial>
-			<!-- mass needed for gazebo to recognise link -->
-			<mass value="1000.00" />
-			<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+			<mass value="1000"/>
+			<inertia ixx="0.004878" ixy="-6.2341e-07" ixz="-7.4538e-07" iyy="0.00090164" iyz="-0.00014394" izz="0.0042946"/>
 		</inertial>
 	</link>
 
@@ -60,8 +65,9 @@
 			<!-- from Solid Edge "Battery Block V2 - 22Ah - 24V.asm" -->
 			<origin xyz="-0.09568 0 0.00658" />
 			<mass value="2.401" />
-			<inertia ixx="0.002" iyy="-0.001" izz="-0.001" ixy="0" ixz="0" iyz="0" />
-		</inertial>
+			<!--<inertia ixx="0.002" iyy="-0.001" izz="-0.001" ixy="0" ixz="0" iyz="0" />-->
+			<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />	
+	</inertial>
 		<visual>
 			<geometry>
 				<mesh filename="package://earth_rover_description/meshes/battery_block.dae" />
@@ -79,18 +85,24 @@
 		<origin xyz="${base_x/2} 0 0" />
 	</joint>
 
-  <xacro:include filename="$(find sensor_sim_gazebo)/urdf/sensor.xacro"/>
+
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
+  <xacro:include filename="$(find earth_rover_description)/urdf/gps.xacro"/>
+  <xacro:include filename="$(find earth_rover_description)/urdf/imu.xacro"/>
 
   <gazebo>
       <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
           <updateRate>4.0</updateRate>
-          <bodyName>sensor</bodyName>
+          <bodyName>gps</bodyName>
           <frameId>base_link</frameId>
           <topicName>/gps/fix</topicName>
           <velocityTopicName>/gps/fix_velocity</velocityTopicName>
-          <referenceLatitude>-30.06022459407145675</referenceLatitude>
-          <referenceLongitude>-51.173913575780311191</referenceLongitude>
-          <referenceHeading>90</referenceHeading>
+          <referenceLatitude>40.846944</referenceLatitude>
+          <referenceLongitude>14.251722</referenceLongitude>
+          <referenceHeading>0</referenceHeading>
           <referenceAltitude>10</referenceAltitude>
           <offset>0 0 0</offset>
           <drift>0.001 0.001 0.001</drift>
@@ -103,11 +115,25 @@
   <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
-      <bodyName>sensor</bodyName>
-      <topicName>imu</topicName>
+      <bodyName>imu</bodyName>
+      <topicName>/imu</topicName>
       <serviceName>imu_service</serviceName>
       <gaussianNoise>0.0</gaussianNoise>
       <updateRate>20.0</updateRate>
+			<frameId>base_link</frameId>
+			<rpyOffset>0 0 </rpyOffset>
+			<xyzOffset>0 0 0</xyzOffset>
+			<gaussianNoise>0.00000001</gaussianNoise>
+			<accelDrift>0.00000001 0.00000001 0.00000001</accelDrift>
+			<accelDriftFrequency>0.00000001 0.00000001 0.00000001</accelDriftFrequency>
+			<accelGaussianNoise>0.00000001 0.00000001 0.00000001</accelGaussianNoise>
+			<rateDrift>0.0 0.0 0.0</rateDrift>
+      <referenceHeading>0</referenceHeading>
+			<rateDriftFrequency>0.0 0.0 0.0</rateDriftFrequency>
+			<rateGaussianNoise>0.0 0.0 0.0</rateGaussianNoise>
+			<headingDrift>0.0 0.0 0.0</headingDrift>
+			<headingDriftFrequency>0.0 0.0 0.0</headingDriftFrequency>
+			<headingGaussianNoise>0.0 0.0 0.0</headingGaussianNoise>
     </plugin>
   </gazebo>
 

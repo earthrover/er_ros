@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<robot name="sensor" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="height1" value="0.05" />
+  <xacro:property name="width" value="0.05" />
+ <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <!--
+<link name="world"/>
+	-->
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps"/>
+  </joint>
+
+ <!-- Base Link -->
+  <link name="gps">
+    <collision>
+      <origin xyz="0 0 ${height1/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${width} ${width} ${height1}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry>
+        <box size="${width} ${width} ${height1}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+<!--
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+-->
+ <gazebo reference="gps">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>
