@@ -1,6 +1,7 @@
-# robot_joint_publisher:
-#  type: "joint_state_controller/JointStateController"
-#  publish_rate: 50
+robot_joint_publisher:
+  type: "joint_state_controller/JointStateController"
+  publish_rate: 50
+
 # Four Wheel Steering
 four_wheel_steering_controller:
     type: "four_wheel_steering_controller/FourWheelSteeringController"

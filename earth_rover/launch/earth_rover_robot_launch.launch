@@ -2,9 +2,11 @@
 
   <!-- Load Earth Rover Hardware Configuration -->
   <rosparam file="$(find earth_rover)/config/hardware.yaml" command="load"/>
-
+  
+  <!--
   <include file="$(find ankle_publisher)/launch/ankle_publisher_launch.launch"/>
-
+  -->
+  
   <!-- Load Earth Rover Description -->
   <include file="$(find earth_rover_description)/launch/description.launch"/>
 

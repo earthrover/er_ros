@@ -12,12 +12,6 @@
     <param name="coalesce_interval" value="0.1" />
   </node>
 
-  <node pkg="joy" type="joy_node" name="joy_node_2">
-    <param name="dev" value="/dev/input/js1" />
-    <param name="deadzone" value="0.05" />
-    <param name="coalesce_interval" value="0.1" />
-  </node>
-
 	<node pkg="earth_steering" name="earth_steering" type="transform.py" output="screen">
 	
 	</node>
