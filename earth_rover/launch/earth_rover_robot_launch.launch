@@ -10,6 +10,7 @@
   <!-- Load Earth Rover Description -->
   <include file="$(find earth_rover_description)/launch/description.launch"/>
 
+
   <!-- Robot Hardware Interface -->
   <node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node" output="screen"/>
 
