@@ -194,7 +194,8 @@ class NtripClient(object):
                         try:
                             data=self.socket.recv(self.buffer)
                             self.out.write(data)
-                            self.send_gga()
+                            if NTRIP_RESEND_SECS > 0:
+                                self.send_gga()
                             if self.UDP_socket:
                                 self.UDP_socket.sendto(data, ('<broadcast>', self.UDP_Port))
 #                            print datetime.datetime.now()-connectTime
@@ -250,10 +251,12 @@ class NtripClient(object):
 
 
 def look_for_device():
+
+
+
     pts = prtlst.comports()
     for pt in pts:
-        print pt
-        if NTRIP_SERIAL_NAME in pt[1]:  # check 'USB' string in device description
+        if NTRIP_SERIAL_NAME in str(pt.product):  # check 'USB' string in device description
             return pt[0]
     return None
 
@@ -284,7 +287,7 @@ if __name__ == '__main__':
         ser = serial.Serial(device, baudrate=115200, timeout=1)
         ntripArgs['out'] = ser
 
-    print device
+    print "Device: %s" % device
     print "Server: " + ntripArgs['caster']
     print "Port: " + str(ntripArgs['port'])
     print "User: " + ntripArgs['user']
