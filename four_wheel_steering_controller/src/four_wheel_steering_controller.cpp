@@ -499,6 +499,7 @@ namespace four_wheel_steering_controller{
 			front_wheel_joints_[1].setCommand(vel_right_front);
 			rear_wheel_joints_[0].setCommand(vel_left_rear);
 			rear_wheel_joints_[1].setCommand(vel_right_rear);
+
 		}
 
 		/// TODO check limits to not apply the same steering on right and left when saturated !

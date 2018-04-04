@@ -543,6 +543,21 @@ E0:AE:5E:3C:47:2D
 
 * Saving the map
 
+## Ntrip Differential GPS
+
+### Setup
+First install pip:
+sudo apt-get install python-pip
+
+Then install pyserial:
+pip install pyserial
+
+### Config
+configure server to use and serial device in /ntrip/config.py
+
+### Usage
+Run the python script /ntrip/client.py to stream differential gps data to the ublox over serial. 
+
 ## Overloop control
 [Tutorial](https://www.youtube.com/watch?v=c-Uy4Kup9RE)
 

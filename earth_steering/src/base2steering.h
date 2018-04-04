@@ -27,4 +27,5 @@ class base2steering {
 		float _t_vel;
 		double _delta_max;
 		double _wheelbase;
+		double _max_x_vel;
 };
