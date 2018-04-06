@@ -14,6 +14,15 @@ Create User "Earth" with administrator privileges
 sudo addgroup -a G nvidia,adm,dialout,cdrom,floppy,sudo,audio,dip,video earthadd
 ```
 
+###### Rename machine
+The /etc/hostname file contains just the name of the machine.
+Change the name into rover-jetson-XXX
+
+That /etc/hosts has an entry for localhost. It should have something like:
+
+ 127.0.0.1    localhost.localdomain localhost
+ 127.0.1.1    rover-jetson-XXX
+ 
 ## RASPBERRY PI - EARTH ROVER - ROS
 
 ###### Install SYSTEM UBUNTU MATE 16.04 LTS
