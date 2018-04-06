@@ -14,6 +14,11 @@ Create User "Earth" with administrator privileges
 sudo addgroup -a G nvidia,adm,dialout,cdrom,floppy,sudo,audio,dip,video earthadd
 ```
 
+Enable Universe so we have access to ROS and python
+```
+sudo add-apt-repository universe
+```
+ 
 ###### Rename machine
 The /etc/hostname file contains just the name of the machine.
 Change the name into rover-jetson-XXX
@@ -23,6 +28,11 @@ That /etc/hosts has an entry for localhost. It should have something like:
  127.0.0.1    localhost.localdomain localhost
  127.0.1.1    rover-jetson-XXX
  
+Enable universe to have access to every package
+```
+sudo add-apt-repository universe
+```
+
 ## RASPBERRY PI - EARTH ROVER - ROS
 
 ###### Install SYSTEM UBUNTU MATE 16.04 LTS
@@ -144,7 +154,7 @@ sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-co
 
 Add kinetic to your setup (Check if it is correct)
 ```
-source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 ```
 
 * ros-kinetic-robot-controllers
@@ -216,9 +226,13 @@ sudo apt-get -y install samba
 Edit
 sudo vim /etc/samba/smb.conf
 ```
+[global]
+   allow insecure wide links = yes
+
 [homes]
    follow symlinks = yes
    wide links = yes
+   
    browseable = yes
    read only = no
    create mask = 0775
@@ -320,6 +334,7 @@ sudo chmod +x /etc/init.d/vncserver
 
 Edit the user xstartup
 ```
+mkdir .vnc
 vim ~/.vnc/xstartup
 ```
 
@@ -381,6 +396,7 @@ eval $(ssh-agent -s) > /dev/null
 
 Add your credentials to ssh for the ssh client to find
 ```
+eval $(ssh-agent -s) 
 ssh-add ~/.ssh/id_rsa
 ```
 
@@ -407,6 +423,7 @@ CLONE EARTH ROVER REPO
 ###### [Create a ROS workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 
 ```
+source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin_make
@@ -434,7 +451,7 @@ cd ~/catkin_ws/src
 ```
 git clone git@github.com:earthrover/earth-rover-ros.git
 
-cd /catkin_ws/src/earth-rover-ros
+cd ~/catkin_ws/src/earth-rover-ros
 git submodule init
 git submodule update
 ```
