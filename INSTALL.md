@@ -3,6 +3,17 @@ INSTALL
 
 Documentation to install and run earth rover UGV
 
+## JETSON - EARTH ROVER - ROS
+
+Install Jetpack 3.2 and CTI patches from Connect Tech Inc.
+This will add the support for the Carrier boards
+
+Create User "Earth" with administrator privileges
+
+```
+sudo addgroup -a G nvidia,adm,dialout,cdrom,floppy,sudo,audio,dip,video earthadd
+```
+
 ## RASPBERRY PI - EARTH ROVER - ROS
 
 ###### Install SYSTEM UBUNTU MATE 16.04 LTS
