@@ -455,13 +455,6 @@ cd ~/catkin_ws/src/earth-rover-ros
 git submodule init
 git submodule update
 ```
-
-Create Eclipse cmake format 
-```
-cd /catkin_ws/
-./scripts/catkin_eclipse.sh
-```
-
 A result similar to this:
 ```
 earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$ git submodule init
@@ -477,14 +470,20 @@ Submodule 'zed-ros-wrapper' (git@github.com:earthrover/zed-ros-wrapper.git) regi
 earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$
 ```
 
-Enter your ROS workspace.
-```
-cd ~/catkin_ws
-```
-
 ###### Create a sym link to scripts to speed up access to launchers
 ```
 ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s scripts
+```
+
+Create Eclipse cmake format 
+```
+cd ~/catkin_ws/
+./scripts/catkin_eclipse.sh
+```
+
+Enter your ROS workspace.
+```
+cd ~/catkin_ws
 ```
 
 #### White list all the packages
@@ -579,6 +578,48 @@ E0:AE:5E:3C:47:2D
 * Creating the map
 
 * Saving the map
+
+### Screen setup
+
+We use Screen a lot. 
+
+Here is an example setup for your screen file:
+```
+vim ~/.screenrc
+```
+
+```
+# Use bash
+shell /bin/bash
+
+autodetach on
+
+# Big scrollback
+defscrollback 5000
+
+# No annoying startup message
+startup_message off
+
+# Display the status line at the bottom
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
+
+# Setup screens
+chdir /home/vagrant/Sites # All screens start in ~/Sites folder
+screen -t 'server' 0 bash # Make first screen for running server
+screen -t 'workspace' 1 bash # Make screen for general work i.e. running git commands
+screen -t 'ros'    2 bash # Make screen for general work i.e. running git commands
+
+# Switch to the workspace screen
+select 1
+
+vbell off
+bell_msg ""
+
+# termcapinfo xterm ti@:te@
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007:ti@:te@'
+```
 
 ## Ntrip Differential GPS
 
