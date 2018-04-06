@@ -11,6 +11,9 @@
 	path = serial
 	url = git@github.com:wjwwood/serial.git
 
+[submodule "earth_rover_navigation"]
+	path = earth_rover_navigation
+	url = git@github.com:earthrover/earth_rover_navigation.git
 
 [submodule "ublox"]
 	path = ublox

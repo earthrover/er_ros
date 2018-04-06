@@ -1,5 +1,5 @@
 earth_rover_hardware:
- conversion_factor: 1450
+ conversion_factor: 2047
  joints:
   # Wheel Joints
     front_right_wheel_joint        : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203356-if02

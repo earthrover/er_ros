@@ -14,6 +14,25 @@ Create User "Earth" with administrator privileges
 sudo addgroup -a G nvidia,adm,dialout,cdrom,floppy,sudo,audio,dip,video earthadd
 ```
 
+Enable Universe so we have access to ROS and python
+```
+sudo add-apt-repository universe
+```
+ 
+###### Rename machine
+The /etc/hostname file contains just the name of the machine.
+Change the name into rover-jetson-XXX
+
+That /etc/hosts has an entry for localhost. It should have something like:
+
+ 127.0.0.1    localhost.localdomain localhost
+ 127.0.1.1    rover-jetson-XXX
+ 
+Enable universe to have access to every package
+```
+sudo add-apt-repository universe
+```
+
 ## RASPBERRY PI - EARTH ROVER - ROS
 
 ###### Install SYSTEM UBUNTU MATE 16.04 LTS
@@ -130,12 +149,12 @@ sudo apt-get -y install ros-kinetic-realtime-tools
 sudo apt-get -y install ros-kinetic-urdf-geometry-parser
 
 sudo apt-get -y install ros-kinetic-ros-control ros-kinetic-ros-controllers ros-kinetic-control-toolbox ros-kinetic-velocity-controllers
-sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-controllers ros-kinetic-position-controllers
+sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-controllers ros-kinetic-position-controllers ros-kinetic-joy
 ```
 
 Add kinetic to your setup (Check if it is correct)
 ```
-source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 ```
 
 * ros-kinetic-robot-controllers
@@ -207,9 +226,13 @@ sudo apt-get -y install samba
 Edit
 sudo vim /etc/samba/smb.conf
 ```
+[global]
+   allow insecure wide links = yes
+
 [homes]
    follow symlinks = yes
    wide links = yes
+   
    browseable = yes
    read only = no
    create mask = 0775
@@ -311,6 +334,7 @@ sudo chmod +x /etc/init.d/vncserver
 
 Edit the user xstartup
 ```
+mkdir .vnc
 vim ~/.vnc/xstartup
 ```
 
@@ -372,6 +396,7 @@ eval $(ssh-agent -s) > /dev/null
 
 Add your credentials to ssh for the ssh client to find
 ```
+eval $(ssh-agent -s) 
 ssh-add ~/.ssh/id_rsa
 ```
 
@@ -398,6 +423,7 @@ CLONE EARTH ROVER REPO
 ###### [Create a ROS workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 
 ```
+source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin_make
@@ -425,17 +451,10 @@ cd ~/catkin_ws/src
 ```
 git clone git@github.com:earthrover/earth-rover-ros.git
 
-cd /catkin_ws/src/earth-rover-ros
+cd ~/catkin_ws/src/earth-rover-ros
 git submodule init
 git submodule update
 ```
-
-Create Eclipse cmake format 
-```
-cd /catkin_ws/
-./scripts/catkin_eclipse.sh
-```
-
 A result similar to this:
 ```
 earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$ git submodule init
@@ -451,14 +470,20 @@ Submodule 'zed-ros-wrapper' (git@github.com:earthrover/zed-ros-wrapper.git) regi
 earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$
 ```
 
-Enter your ROS workspace.
-```
-cd ~/catkin_ws
-```
-
 ###### Create a sym link to scripts to speed up access to launchers
 ```
 ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s scripts
+```
+
+Create Eclipse cmake format 
+```
+cd ~/catkin_ws/
+./scripts/catkin_eclipse.sh
+```
+
+Enter your ROS workspace.
+```
+cd ~/catkin_ws
 ```
 
 #### White list all the packages
@@ -553,6 +578,48 @@ E0:AE:5E:3C:47:2D
 * Creating the map
 
 * Saving the map
+
+### Screen setup
+
+We use Screen a lot. 
+
+Here is an example setup for your screen file:
+```
+vim ~/.screenrc
+```
+
+```
+# Use bash
+shell /bin/bash
+
+autodetach on
+
+# Big scrollback
+defscrollback 5000
+
+# No annoying startup message
+startup_message off
+
+# Display the status line at the bottom
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
+
+# Setup screens
+chdir /home/vagrant/Sites # All screens start in ~/Sites folder
+screen -t 'server' 0 bash # Make first screen for running server
+screen -t 'workspace' 1 bash # Make screen for general work i.e. running git commands
+screen -t 'ros'    2 bash # Make screen for general work i.e. running git commands
+
+# Switch to the workspace screen
+select 1
+
+vbell off
+bell_msg ""
+
+# termcapinfo xterm ti@:te@
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007:ti@:te@'
+```
 
 ## Ntrip Differential GPS
 
