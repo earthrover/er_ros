@@ -639,6 +639,19 @@ Run the python script /ntrip/client.py to stream differential gps data to the ub
 ## Overloop control
 [Tutorial](https://www.youtube.com/watch?v=c-Uy4Kup9RE)
 
+## Indicator IP
+
+sudo apt-add-repository ppa:bovender/bovender
+sudo apt-get update
+sudo apt-get install indicator-ip
+
+```
+indicator-ip --autostart
+```
+
+This will install the indicator-ip on the startup applications
+add ```indicator-ip -i wlan0```
+
 ```
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
