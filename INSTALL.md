@@ -507,6 +507,14 @@ catkin_make -j1
 rospack profile
 ```
 
+## Extras
+
+###### Install locate
+```
+sudo apt-get install mlocate
+'''
+You can update ```locate``` with the command ```updatedb```
+
 Troubleshooting
 ---------------------------
 
