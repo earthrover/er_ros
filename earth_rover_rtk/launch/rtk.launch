@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+  <rosparam command="load" file="$(find earth_rover_rtk)/config/trimble.yaml" />
+
   <node pkg="earth_rover_rtk" type="ntrip_node.py" name="earth_rover_rtk"
         output="screen"
         clear_params="true"
         respawn="true"
         respawn_delay="30">
-    <rosparam command="load" file="$(find earth_rover_rtk)/config/trimble.yaml" />
   </node>
 </launch>
+
