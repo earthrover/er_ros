@@ -652,6 +652,19 @@ indicator-ip --autostart
 This will install the indicator-ip on the startup applications
 add ```indicator-ip -i wlan0```
 
+## Replace text at ubuntu desktop
+
+We can replace the desktop name so we can identify the machine by looking at the name at the desktop
+```
+cat > /tmp/foo.po
+msgid "Ubuntu Desktop"
+msgstr "Earth Rover - Network Name"
+^D
+
+cd /usr/share/locale/en/LC_MESSAGES
+sudo msgfmt -o unity.mo /tmp/foo.po
+```
+
 ```
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
