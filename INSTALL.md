@@ -507,6 +507,14 @@ catkin_make -j1
 rospack profile
 ```
 
+## Extras
+
+###### Install locate
+```
+sudo apt-get install mlocate
+'''
+You can update ```locate``` with the command ```updatedb```
+
 Troubleshooting
 ---------------------------
 
@@ -638,6 +646,35 @@ Run the python script /ntrip/client.py to stream differential gps data to the ub
 
 ## Overloop control
 [Tutorial](https://www.youtube.com/watch?v=c-Uy4Kup9RE)
+
+## Indicator IP
+
+sudo apt-add-repository ppa:bovender/bovender
+sudo apt-get update
+sudo apt-get install indicator-ip
+
+```
+indicator-ip --autostart
+```
+
+This will install the indicator-ip on the startup applications
+add ```indicator-ip -i wlan0```
+
+## Replace text at ubuntu desktop
+
+We can replace the desktop name so we can identify the machine by looking at the name at the desktop
+
+```
+cat > /tmp/foo.po
+msgid "Ubuntu Desktop"
+msgstr "Earth Rover - Network Name"
+^D
+
+cd /usr/share/locale/en/LC_MESSAGES
+sudo msgfmt -o unity.mo /tmp/foo.po
+```
+
+## Have fun!
 
 ```
 ----------------------------------------------------------------------------------------------------
