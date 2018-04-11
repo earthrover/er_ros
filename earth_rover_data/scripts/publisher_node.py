@@ -61,12 +61,8 @@ class EarthRoverPublisherNode(object):
 
     def publish(self):
         mutex.acquire()
-        try:
-            self.wrapper.set_state(self.state)
-        except Exception as e:
-            print("failed to send state: %s" % e)
-        finally:
-            mutex.release()
+        self.wrapper.set_state(self.state)
+        mutex.release()
 
 
 if __name__ == '__main__':
