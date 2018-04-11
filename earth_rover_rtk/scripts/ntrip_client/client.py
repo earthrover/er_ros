@@ -43,6 +43,8 @@ class NtripClient(object):
                  V2=False,
                  headerFile=sys.stderr,
                  headerOutput=False,
+                 position_callback=None,
+                 resend_secs=0
                  ):
         self.buffer=buffer
         self.user=base64.b64encode(user)
@@ -61,6 +63,8 @@ class NtripClient(object):
         self.headerOutput=headerOutput
         self.maxConnectTime=maxConnectTime
         self.lastGga = 0
+        self.position_callback = position_callback
+        self.resend_secs = resend_secs
 
         self.socket=None
 
@@ -106,6 +110,9 @@ class NtripClient(object):
         return header
 
     def getGGAString(self):
+        if self.position_callback is not None:
+            lat, lon, self.height = self.position_callback()
+            self.setPosition(lat, lon)
         now = datetime.datetime.utcnow()
         ggaString= "GPGGA,%02d%02d%04.2f,%02d%011.8f,%1s,%03d%011.8f,%1s,1,05,0.19,+00400,M,%5.3f,M,," % \
             (now.hour,now.minute,now.second,self.latDeg,self.latMin,self.flagN,self.lonDeg,self.lonMin,self.flagE,self.height)
@@ -122,7 +129,7 @@ class NtripClient(object):
 
     def send_gga(self):
         now = time.time()
-        if now > self.lastGga + NTRIP_RESEND_SECS:
+        if now > self.lastGga + self.resend_secs:
             self.socket.sendall(self.getGGAString())
             self.lastGga = now
 
@@ -194,7 +201,7 @@ class NtripClient(object):
                         try:
                             data=self.socket.recv(self.buffer)
                             self.out.write(data)
-                            if NTRIP_RESEND_SECS > 0:
+                            if self.resend_secs > 0:
                                 self.send_gga()
                             if self.UDP_socket:
                                 self.UDP_socket.sendto(data, ('<broadcast>', self.UDP_Port))
@@ -204,7 +211,6 @@ class NtripClient(object):
                                     if self.verbose:
                                         sys.stderr.write("Connection Timed exceeded\n")
                                     sys.exit(0)
-
 
                         except socket.timeout:
                             sys.stderr.write('Connection TimedOut\n')
@@ -250,36 +256,17 @@ class NtripClient(object):
             sys.exit()
 
 
-def look_for_device():
-
-
-
+def look_for_device(serial_name, ):
     pts = prtlst.comports()
     for pt in pts:
-        if NTRIP_SERIAL_NAME in str(pt.product):  # check 'USB' string in device description
+        if serial_name in str(pt.product):  # check 'USB' string in device description
             return pt[0]
     return None
 
 
-if __name__ == '__main__':
+def run_client(ntripArgs, serial_name):
 
-    ntripArgs = {}
-    ntripArgs['lat'] = NTRIP_LAT
-    ntripArgs['lon'] = NTRIP_LON
-    ntripArgs['height'] = NTRIP_HEIGHT
-    ntripArgs['host'] = False
-    ntripArgs['ssl'] = False
-    ntripArgs['user'] = NTRIP_USER
-    # ntripArgs['caster']="82.135.20.213"
-    ntripArgs['caster'] = NTRIP_CASTER
-    # ntripArgs['caster']="www.vrsnow.nl"
-    ntripArgs['port'] = NTRIP_PORT
-    ntripArgs['mountpoint'] = NTRIP_MOUNTPOINT
-    ntripArgs['V2'] = NTRIP_V2
-    ntripArgs['verbose'] = NTRIP_VERBOSE
-    ntripArgs['headerOutput'] = False
-
-    device = look_for_device()
+    device = look_for_device(serial_name)
 
     ser = None
 
@@ -310,3 +297,28 @@ if __name__ == '__main__':
         if ser is not None:
             ser.close()
         print "done"
+
+
+
+if __name__ == '__main__':
+
+    ntripArgs = {}
+    ntripArgs['lat'] = NTRIP_LAT
+    ntripArgs['lon'] = NTRIP_LON
+    ntripArgs['height'] = NTRIP_HEIGHT
+    ntripArgs['host'] = False
+    ntripArgs['ssl'] = False
+    ntripArgs['user'] = NTRIP_USER
+    ntripArgs['caster'] = NTRIP_CASTER
+    ntripArgs['port'] = NTRIP_PORT
+    ntripArgs['mountpoint'] = NTRIP_MOUNTPOINT
+    ntripArgs['V2'] = NTRIP_V2
+    ntripArgs['verbose'] = NTRIP_VERBOSE
+    ntripArgs['headerOutput'] = False
+    ntripArgs['resend_secs'] = NTRIP_RESEND_SECS
+
+    run_client(ntripArgs, NTRIP_SERIAL_NAME)
+
+
+
+

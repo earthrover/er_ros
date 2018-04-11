@@ -1,0 +1,8 @@
+## Lieca NTRIP server settings
+
+ntrip:
+  user : "15095176:bde3f"
+  caster: "uk.nrtk.eu"
+  port = : 2101
+  mountpoint : "HS2_1_14"
+  resend_secs: 0

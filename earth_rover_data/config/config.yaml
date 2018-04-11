@@ -1,0 +1,7 @@
+
+firebase:
+  creds_path: "/etc/opt/earth_rover/earth_rover_ugv_1f09e087.json"
+  google_api_key: "AIzaSyAeMKfSUjglQGHSDpI8u15iZNmIvx9y_Ak"
+  custom_token_url: "http://earth-rover-land.appspot.com/api/firebase-token/ugv_1f09e087-2ce6-4ddc-8039-5612d6974f2f"
+  auth_domain: "earth-rover-land.firebaseapp.com"
+  db_url: "https://earth-rover-land.firebaseio.com"
