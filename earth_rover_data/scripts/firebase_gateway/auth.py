@@ -142,9 +142,8 @@ def get_firebase_custom_token(creds, custom_token_url):
     if rsp.status_code == 200:
         return rsp.json()
     else:
-        print "failed to get custom token: %s %s" % (rsp.status_code, rsp.content)
-
+        raise Exception("failed to get custom token: %s %s" % (rsp.status_code, rsp.content))
     if rsp.status_code == 409:
-        print "Error: another device is using this key already"
+        raise Exception("Error: another device is using this key already")
 
     return None
