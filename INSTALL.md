@@ -152,6 +152,11 @@ sudo apt-get -y install ros-kinetic-ros-control ros-kinetic-ros-controllers ros-
 sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-controllers ros-kinetic-position-controllers ros-kinetic-joy
 ```
 
+Navigation specifics
+```
+sudo apt-get -y install ros-kinetic-hector-gazebo-plugins
+```
+
 Add kinetic to your setup (Check if it is correct)
 ```
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
