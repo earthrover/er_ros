@@ -61,7 +61,6 @@ class FirebaseWrapper():
         except HTTPError as e:
             self.refresh_custom_token()
             user_json = self.auth.sign_in_with_custom_token(self.custom_token)
-        print("id_token: ", user_json["idToken"])
         self.id_token = user_json["idToken"]
         self.refresh_token = user_json["refreshToken"]
 
