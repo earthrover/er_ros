@@ -18,7 +18,7 @@ hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
 # Setup screens
 chdir /home/vagrant/Sites # All screens start in ~/Sites folder
 screen -t 'cmd' 0 bash # Make first screen for running server
-screen -t 'wrkspace' 1 bash --rcfile .bashrc -ci roscore
+#screen -t 'roscore' 1 bash --rcfile .bashrc -ci roscore
 screen -t 'gps' 2 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh
 screen -t 'pub' 2 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh
 #screen -r 'ros_main' 3 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_all.sh
