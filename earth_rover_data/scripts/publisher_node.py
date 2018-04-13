@@ -18,9 +18,11 @@ def fix_callback(data):
     mutex.acquire()
     try:
         node.state["fix"] = {
+            "status": data.status.status,
+            "service": data.status.service,
             "lat": data.latitude,
             "lon": data.longitude,
-            "alt": data.altitude
+            "alt": data.altitude,
         }
     finally:
         mutex.release()
