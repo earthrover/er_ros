@@ -12,7 +12,9 @@
 case $1 in
      start)
        # Launch ros script with screen 
-       su - earth -c "screen -dmS ros -c /home/earth/catkin_ws/src/earth-rover-ros/scripts/.roslaunch.rc -t ros_main bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_all.sh"
+#       su - earth -c "screen -dmS ros -c /home/earth/catkin_ws/src/earth-rover-ros/scripts/.roslaunch.rc -t ros_main bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_all.sh"
+
+       su - earth -c "screen -dmS ros -c /home/earth/catkin_ws/src/earth-rover-ros/scripts/.roslaunch.rc -t earth_rover bash"
        ;;
      stop)
         kill -s 15 `pidof screen`
