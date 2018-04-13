@@ -7,4 +7,8 @@ ntrip:
   mountpoint : "15_TVN_RTCM_32"
   resend_secs: 10
 
+  verbose: true
+  lat: 51.509
+  lon: -0.119
+  height: 16.12
 
