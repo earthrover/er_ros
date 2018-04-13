@@ -13,9 +13,10 @@ mutex = Lock()
 def fix_callback(data):
     mutex.acquire()
     try:
-        node.lat = data.latitude
-        node.lon = data.longitude
-        node.height = data.altitude
+        if data.status >= 0:
+            node.lat = data.latitude
+            node.lon = data.longitude
+            node.height = data.altitude
     finally:
         mutex.release()
 
