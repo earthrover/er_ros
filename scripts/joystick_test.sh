@@ -1,16 +1,20 @@
 #!/bin/sh
 
 d=$(date)
-echo "JOY TEST $d"
+echo "JOY TEST $d WAIT 10 SECS"
 
 echo "JOYSTICK INIT" > /home/earth/display.txt
+sleep 10
 
+file=/dev/input/js0
 while true; do
-	/home/earth/catkin_ws/src/earth-rover-ros/displays/display_text.sh JOYSTICK_ON
-	jstest /dev/input/js0
-	for i in `seq 1 5`;
-	do
-	    echo "CHECK JOYSTICK" > /home/earth/display.txt
+	if [ -e "$file" ]; then
+		echo "JOYSTICK OK"
+		echo "JOYSTICK OK" > /home/earth/display.txt
+		jstest /dev/input/js0
+	else
+	    echo "CHECK JOYSTICK" > /home/earth/display.txt		
+	    echo "CHECK JOYSTICK"
 	    sleep 10
-	done
+	fi
 done

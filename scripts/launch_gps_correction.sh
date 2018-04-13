@@ -1,6 +1,7 @@
 #!/bin/sh
 
-sleep 10
+echo "GPS CORRECTION 60 SECS"
+sleep 60
 echo "RTK Launch" > /home/earth/display.txt
 roslaunch earth_rover_rtk rtk.launch
 
