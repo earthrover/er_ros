@@ -25,6 +25,8 @@ screen -t 'pub' 2 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rove
 screen -t 'jstest' 4 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/joystick_test.sh 
 screen -t 'rtk' 5 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/rtk_launch.sh
 
+screen -t 'display' 6 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_loop.sh
+
 # Switch to the workspace screen
 select 1
 
