@@ -25,7 +25,8 @@ foreach(dir
   earth_rover(${dir})
 endforeach()
 
-install(FILES
-  launch/talker_listener.launch
+install(DIRECTORY
+  launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
+
