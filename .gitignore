@@ -15,6 +15,10 @@ ankle_publisher/Makefile
 four_wheel_steering_controller/CTestTestfile.cmake
 four_wheel_steering_controller/Makefile
 
+simulation/sensor_sim_gazebo/CMakeFiles
+simulation/sensor_sim_gazebo/Makefile
+simulation/sensor_sim_gazebo/catkin_generated
+
 earth_rover/Makefile
 earth_steering/Makefile
 earth_*/Makefile

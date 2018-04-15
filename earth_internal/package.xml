@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package>
+  <name>earth_rover_internal</name>
+  <version>0.9.0</version>
+  <description>
+	Checks connectivity and functionality between PI and Jetson
+  </description>
+  <maintainer email="sergio@earthrover.cc">Sergio A. Mart</maintainer>
+  <license>BSD</license>
+
+  <url type="website">http://www.earthrover.cc/wiki</url>
+  <url type="bugtracker">https://github.com/earth_rover_ros/issues</url>
+  <url type="repository">https://github.com/earth_rover_ros</url>
+  <author>Sergio A. Mart</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>message_generation</build_depend>
+  <build_depend>rosconsole</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>roscpp_serialization</build_depend>
+  <build_depend>rostime</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>rosconsole</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>roscpp_serialization</run_depend>
+  <run_depend>rostime</run_depend>
+  <run_depend>std_msgs</run_depend>
+</package>

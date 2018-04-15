@@ -79,6 +79,7 @@
 		<origin xyz="${base_x/2} 0 0" />
 	</joint>
 
+
   <xacro:include filename="$(find sensor_sim_gazebo)/urdf/sensor.xacro"/>
 
   <gazebo>
@@ -99,6 +100,7 @@
           <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
       </plugin>
   </gazebo>
+  
 
   <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
@@ -112,6 +114,7 @@
   </gazebo>
 
 	<!-- gazebo tags -->
+    
 	<gazebo>
 		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
 			<robotNamespace>/</robotNamespace>

@@ -1,0 +1,1 @@
+rosrun rviz rviz -l
