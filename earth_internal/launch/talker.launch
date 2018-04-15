@@ -1,4 +1,3 @@
 <launch>
-  <node name="listener" pkg="earth_rover_internal" type="listener" output="screen"/>
   <node name="talker" pkg="earth_rover_internal" type="talker" output="screen"/>
 </launch>
