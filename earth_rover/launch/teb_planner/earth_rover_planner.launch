@@ -51,7 +51,9 @@
 		<param name="initial_pose_a"            value="0"/>
 	</node>
 
-	  <!--  **************** Visualisation ****************  -->
+	  <!--  **************** Visualisation **************** 
+		
 	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find teb_local_planner_tutorials)/cfg/rviz_navigation.rviz"/>
+ -->
 
 </launch>
