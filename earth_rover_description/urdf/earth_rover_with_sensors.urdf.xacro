@@ -94,8 +94,8 @@
           <referenceHeading>90</referenceHeading>
           <referenceAltitude>10</referenceAltitude>
           <offset>0 0 0</offset>
-          <drift>0.001 0.001 0.001</drift>
-          <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
+          <drift>0.0 0.0 0.0</drift>
+          <gaussianNoise>0.0 0.0 0.0</gaussianNoise>
           <velocityDrift>0.001 0.001 0.001</velocityDrift>
           <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
       </plugin>
