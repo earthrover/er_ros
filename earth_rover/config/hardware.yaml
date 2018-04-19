@@ -1,5 +1,13 @@
 earth_rover_hardware:
+ diagnostic_frequency: 1
  conversion_factor: 2047
+ control_frequency: 10
+ front_left_steering_offset: 0
+ front_right_steering_offset: 0
+
+ back_left_steering_offset: 0
+ back_right_steering_offset: 0
+
  joints:
   # Wheel Joints
     front_left_wheel_joint        : /dev/serial/by-id/usb-Pololu_Corporation_Pololu_Jrk_21v3_Motor_Controller_00203382-if02
