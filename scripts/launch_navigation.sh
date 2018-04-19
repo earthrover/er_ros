@@ -8,9 +8,7 @@ sleep 60
 
 while true; do
         echo "NAVIGATION" > /home/earth/display.txt
-        roslaunch earth_rover earth_rover_localization.launch
-	    roslaunch earth_rover earth_rover_planner.launch
-	    rosrun earth_rover_navigation earth_rover_nav
+        roslaunch earth_rover earth_rover_navigation.launch
         echo "RETRY NAVIGATION" > /home/earth/display.txt
         sleep 1
 done
