@@ -2,7 +2,7 @@
 
 <launch>
 
-  <include file="$(find earth_rover)/launch/earth_rover_robot_launch.launch" />
+  <!--<include file="$(find earth_rover)/launch/earth_rover_robot_launch.launch" />-->
 
   <!-- Load the joystick -->
 

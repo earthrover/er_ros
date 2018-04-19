@@ -18,16 +18,18 @@ hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
 # Setup screens
 chdir /home/vagrant/Sites # All screens start in ~/Sites folder
 screen -t 'core' 0 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_core.sh
-screen -t 'main' 1 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_all.sh
-screen -t 'imu' 2 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh 
+screen -t 'joy' 1 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_joy.sh
+screen -t 'imu' 2 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh
 
 screen -t 'rtk' 3 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/rtk_launch.sh
 screen -t 'gps' 4 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh
 screen -t 'pub' 5 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh
-screen -t 'jstest' 6 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/joystick_test.sh 
-screen -t 'display' 7 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_loop.sh
 
+screen -t 'jstest' 6 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/joystick_test.sh
+screen -t 'display' 7 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_loop.sh
 screen -t 'read' 8 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_read.sh
+
+screen -t 'robot' 9 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_robot_hardware.sh
 
 # Switch to the workspace screen
 select 1

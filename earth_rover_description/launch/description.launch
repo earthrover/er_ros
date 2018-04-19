@@ -2,17 +2,15 @@
 
 <launch>
 
-
-
 	<param name="robot_description" command="xacro $(find earth_rover_description)/urdf/earth_rover.urdf.xacro"/>
-<rosparam file="$(find earth_rover)/config/earth_rover_4w_control.yaml" command="load"/>
+    <rosparam file="$(find earth_rover)/config/earth_rover_4w_control.yaml" command="load"/>
 
-  <!-- load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    <!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
 	output="screen" ns="/" args="four_wheel_steering_controller"/>
 
 
-   <node pkg="tf" type="static_transform_publisher" name="gps_tf" args="0 0 0 0 0 0 /base_link /gps 100"/> 
+    <node pkg="tf" type="static_transform_publisher" name="gps_tf" args="0 0 0 0 0 0 /base_link /gps 100"/>
 <!--
    <node pkg="tf" type="static_transform_publisher" name="imu_tf" args="0 0 0 0 1.57 0 /base_link /imu_bosch_link 100"/> 
 -->
