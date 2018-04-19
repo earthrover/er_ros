@@ -30,8 +30,8 @@ screen -t 'display' 7 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-
 screen -t 'read' 8 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_read.sh
 
 screen -t 'robot' 9 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_robot_hardware.sh
-screen -t 'steer' 10 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering_localization.sh
-screen -t 'nav' 11 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_navigation.sh
+screen -t 'steer' 10 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering.sh
+#screen -t 'nav' 11 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_navigation.sh
 
 # Switch to the workspace screen
 select 1
