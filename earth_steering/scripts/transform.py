@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import subprocess
 from threading import Lock
 import rospy
 from sensor_msgs.msg import NavSatFix
@@ -52,6 +53,10 @@ class SteeringTransformNode(object):
         self.jerk = 0.5
         
         self.button_handlers[3] = self.nav_start
+        self.button_handlers[4] = self.run_command_4
+        self.button_handlers[5] = self.run_command_5
+        self.button_handlers[6] = self.run_command_6
+        self.button_handlers[7] = self.run_command_7
         self.button_handlers[13] = self.nav_clear
         self.button_handlers[14] = self.nav_reset
         self.button_handlers[15] = self.nav_pause
@@ -73,7 +78,22 @@ class SteeringTransformNode(object):
         sec_delta = (sec - self.last_sec) * 1000000000
         nano_delta = nano - self.last_nano
         return sec_delta + nano_delta
-        
+
+    def run_command_4(self):
+        cmd = "joy_cmd_4"
+        subprocess.Popen(cmd, shell=True)
+
+    def run_command_5(self):
+        cmd = "joy_cmd_5"
+        subprocess.Popen(cmd, shell=True)
+
+    def run_command_6(self):
+        cmd = "joy_cmd_6"
+        subprocess.Popen(cmd, shell=True)
+
+    def run_command_7(self):
+        cmd = "joy_cmd_7"
+        subprocess.Popen(cmd, shell=True)
         
     def nav_start(self):
         # self.send_waypoints()
@@ -85,17 +105,15 @@ class SteeringTransformNode(object):
     def nav_clear(self):
         navigation_api.pause()
         navigation_api.cancel()
-    	
-    
+
     def nav_reset(self):
         navigation_api.pause()
-    	navigation_api.cancel()
+        navigation_api.cancel()
         if os.path.exists(self.nav_file_path):
             os.remove(self.nav_file_path)
         with open(self.nav_file_path, 'w') as f:
-        	f.write("Type: geo\n")
-        	
-        	
+            f.write("Type: geo\n")
+
     def send_waypoints(self):
     
         if not os.path.exists(self.nav_file_path):
@@ -105,23 +123,21 @@ class SteeringTransformNode(object):
             
         with open(self.nav_file_path, 'r') as f:
             for line in f.readlines():
-        	    if "Type" in line:
-        	        if "cartesian" in line:
-        	            cartesian = True
-        	    else:
-        	        x, y, a = line.split(" ")
-        	        if cartesian:
-        	        	navigation_api.add_waypoint_cartesian(float(x), float(y), float(a))
-        	        else:
-        	            navigation_api.add_waypoint(float(x), float(y), float(a))
-        	        
-        
-        
+                if "Type" in line:
+                    if "cartesian" in line:
+                        cartesian = True
+                else:
+                    x, y, a = line.split(" ")
+                    if cartesian:
+                        navigation_api.add_waypoint_cartesian(float(x), float(y), float(a))
+                    else:
+                        navigation_api.add_waypoint(float(x), float(y), float(a))
+
     def nav_add(self):
     
         if not os.path.exists(self.nav_file_path):
-        	with open(self.nav_file_path, 'a') as f:
-        	    f.write("Type: geo\n") 
+            with open(self.nav_file_path, 'a') as f:
+                f.write("Type: geo\n")
         	    
         mutex.acquire()
         fix = self.state["fix"].copy()
@@ -161,8 +177,8 @@ class SteeringTransformNode(object):
         
     def get_angles_scaled(self, joy, scale):
     
-    	crab = self.get_crab(joy) * scale
-    	turn = self.get_turn(joy) * scale
+        crab = self.get_crab(joy) * scale
+        turn = self.get_turn(joy) * scale
         front = turn/2.0 + crab
         back = -turn/2.0 + crab
         return front, back
@@ -170,7 +186,7 @@ class SteeringTransformNode(object):
         
     def get_angles(self, joy):
     
-    	front, back = self.get_angles_scaled(joy, 1.0)
+        front, back = self.get_angles_scaled(joy, 1.0)
         abs_front = abs(front)
         abs_back = abs(back)
         abs_max = max(abs_front, abs_back)
@@ -182,7 +198,7 @@ class SteeringTransformNode(object):
         
     def send_message(self, velocity, front, back):
     
-    	msg = FourWheelSteering(front_steering_angle=front,
+        msg = FourWheelSteering(front_steering_angle=front,
     	    rear_steering_angle=back,
     	    front_steering_angle_velocity=self.angle_change_rate,
     	    rear_steering_angle_velocity=self.angle_change_rate,
@@ -197,13 +213,12 @@ class SteeringTransformNode(object):
         for i, button_state in enumerate(joy.buttons):
             
             if button_state == 1 and self.button_states[i] == 0:
-        		handler = self.button_handlers[i]
-        		print("pressed button %s" % i)
-        		if handler is not None:
-        		    handler()
+                handler = self.button_handlers[i]
+                print("pressed button %s" % i)
+                if handler is not None:
+                    handler()
             self.button_states[i] = button_state
-        
-    
+
   
     def __call__(self, joy):
     
@@ -213,8 +228,6 @@ class SteeringTransformNode(object):
         front, back = self.get_angles(joy)
         self.send_message(velocity, front, back)
 
-
-    
 def listener():
     global node
     node = SteeringTransformNode()

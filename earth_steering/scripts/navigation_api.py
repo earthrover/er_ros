@@ -4,14 +4,9 @@ import rospy
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Pose, Quaternion, Point
 
-
 from sensor_msgs.msg import NavSatFix
-
 from earth_rover_navigation.srv import *
-
 import earth_rover_navigation.srv as srv
-
-print srv.__dict__
 
 api = None
 
