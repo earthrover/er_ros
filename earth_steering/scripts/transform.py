@@ -80,19 +80,19 @@ class SteeringTransformNode(object):
         return sec_delta + nano_delta
 
     def run_command_4(self):
-        cmd = "joy_cmd_4"
+        cmd = "/home/earth/catkin_ws/scripts/joy_cmd_1.sh"
         subprocess.Popen(cmd, shell=True)
 
     def run_command_5(self):
-        cmd = "joy_cmd_5"
+        cmd = "/home/earth/catkin_ws/scripts/joy_cmd_2.sh"
         subprocess.Popen(cmd, shell=True)
 
     def run_command_6(self):
-        cmd = "joy_cmd_6"
+        cmd = "/home/earth/catkin_ws/scripts/joy_cmd_3.sh"
         subprocess.Popen(cmd, shell=True)
 
     def run_command_7(self):
-        cmd = "joy_cmd_7"
+        cmd = "/home/earth/catkin_ws/scripts/joy_cmd_4.sh"
         subprocess.Popen(cmd, shell=True)
         
     def nav_start(self):
