@@ -1,6 +1,6 @@
 #!/bin/sh
-echo "RTK 60 SECS WAIT"
-sleep 60
+echo "RTK $1 SECS WAIT"
+sleep $1
 
 while true; do
 	echo "UBLOX" > /home/earth/display.txt

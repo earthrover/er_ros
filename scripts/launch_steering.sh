@@ -1,10 +1,10 @@
 #!/bin/sh
 
 d=$(date)
-echo "STEERING LOCAL $d"
+echo "STEERING LOCAL $d WAIT $1"
 echo "STEERING LOCAL" > /home/earth/display.txt
 
-sleep 30
+sleep $1
 
 while true; do
         echo "STEERING LOCAL" > /home/earth/display.txt
