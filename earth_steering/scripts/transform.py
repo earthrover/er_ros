@@ -5,11 +5,12 @@ from threading import Lock
 import rospy
 from sensor_msgs.msg import NavSatFix
 
-
 from sensor_msgs.msg import Joy
 from four_wheel_steering_msgs.msg import FourWheelSteering
 
 import navigation_api
+
+INPLACE_FILE = "/home/earth/catkin_ws/scripts/rotate_in_place.sh"
 
 mutex = Lock()
 
@@ -41,6 +42,7 @@ class SteeringTransformNode(object):
         self.button_states = 19 * [0]
         self.button_handlers = 19 * [None]
         self.state = {}
+        self.inplace = False
         
         
         self.velocity_scale = 0.5
@@ -61,7 +63,8 @@ class SteeringTransformNode(object):
         self.button_handlers[14] = self.nav_reset
         self.button_handlers[15] = self.nav_pause
         self.button_handlers[12] = self.nav_add
-        
+        self.button_handlers[16] = self.run_in_place
+
         dir = os.path.dirname(__file__)
         
         self.nav_file_path = os.path.join(dir, "geo_wp.txt")
@@ -84,6 +87,7 @@ class SteeringTransformNode(object):
         subprocess.Popen(cmd, shell=True)
 
     def run_command_5(self):
+
         cmd = "/home/earth/catkin_ws/scripts/joy_cmd_2.sh"
         subprocess.Popen(cmd, shell=True)
 
@@ -93,6 +97,11 @@ class SteeringTransformNode(object):
 
     def run_command_7(self):
         cmd = "/home/earth/catkin_ws/scripts/joy_cmd_4.sh"
+        subprocess.Popen(cmd, shell=True)
+
+    def run_in_place(self):
+        self.inplace = not os.path.exists(INPLACE_FILE)
+        cmd = INPLACE_FILE
         subprocess.Popen(cmd, shell=True)
         
     def nav_start(self):
@@ -166,13 +175,18 @@ class SteeringTransformNode(object):
     def get_crab(self, joy):
     
         crab = joy.axes[0]/float(self.crab_scale)
-        return crab
+        if self.inplace:
+            return 0.0
+        else:
+            return crab
         
         
     def get_turn(self, joy):
-    
         turn = joy.axes[2]/float(self.turn_scale)
-        return turn
+        if self.inplace:
+            return 0.0
+        else:
+            return turn
         
         
     def get_angles_scaled(self, joy, scale):
