@@ -1,10 +1,10 @@
 #!/bin/sh
 
 d=$(date)
-echo "LAUNCH ROBOT $d"
+echo "LAUNCH ROBOT $d WAIT $1 SECS"
 echo "LAUNCH ROBOT" > /home/earth/display.txt
 
-sleep 20
+sleep $1
 
 while true; do
         echo "EARTH ROBOT" > /home/earth/display.txt

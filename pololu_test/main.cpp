@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #ifdef _WIN32
 #define O_NOCTTY 0
@@ -65,7 +66,7 @@ int main(int argc, const char * argv[])
 
     int i;
     for(i = 0; i < argc; i++) {
-       // printf("Argument %i = %s\n", i, argv[i]);
+       printf("Argument %i = %s\n", i, argv[i]);
     }
 
     // Open the Jrk's virtual COM port.
@@ -81,6 +82,11 @@ int main(int argc, const char * argv[])
     }
 
     device = argv[1];
+
+    int speed = 3000; 
+    if (argc >= 2) {
+	speed = atoi(argv[2]);
+    }
 
     int fd = open(device, O_RDWR | O_NOCTTY);
     if (fd == -1)
@@ -103,7 +109,7 @@ int main(int argc, const char * argv[])
     int target = jrkGetTarget(fd);
     printf("Current Target is %d.\n", target);
 
-    int newTarget = (target < 2048) ? 3000 : 1000;
+    int newTarget=speed; 
     printf("Setting Target to %d.\n", newTarget);
     jrkSetTarget(fd, newTarget);
 

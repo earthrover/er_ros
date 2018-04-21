@@ -1,6 +1,6 @@
 #!/bin/sh
-echo "IMU 20 SECS WAIT"
-sleep 20
+echo "IMU $1 SECS WAIT"
+sleep $1
 while true; do
         echo "IMU PUBLISHER" > /home/earth/display.txt
 	roslaunch bosch_imu_driver imu.launch
