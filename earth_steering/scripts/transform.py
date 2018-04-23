@@ -156,14 +156,17 @@ class SteeringTransformNode(object):
                 f.write("Type: geo\n")
 
         mutex.acquire()
-        fix = self.state["fix"].copy()
+        fix = self.state.get("fix")
+        if fix is not None:
+            fix = fix.copy()
         mutex.release()
-    
-        with open(self.nav_file_path, 'a') as f:    
-            x = fix["lat"]
-            y = fix["lon"]
-            bearing = 0
-            f.write("%s %s %s\n" % (x, y, bearing))
+
+        if fix is not None:
+            with open(self.nav_file_path, 'a') as f:
+                x = fix["lat"]
+                y = fix["lon"]
+                bearing = 0
+                f.write("%s %s %s\n" % (x, y, bearing))
         
   
         
