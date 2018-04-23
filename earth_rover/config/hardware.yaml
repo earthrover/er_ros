@@ -1,12 +1,25 @@
 earth_rover_hardware:
  diagnostic_frequency: 1
  conversion_factor: 2047
- control_frequency: 10
- front_left_steering_offset: 0
- front_right_steering_offset: 0
+ control_frequency: 12
 
- back_left_steering_offset: 0
- back_right_steering_offset: 0
+ front_left_steering_center:  2047
+ front_right_steering_center: 2200
+
+ back_left_steering_center:   2325
+ back_right_steering_center:  1996 
+
+ front_left_steering_min: 0
+ front_right_steering_min: 400
+
+ back_left_steering_min: 500
+ back_right_steering_min: 0
+
+ front_left_steering_max: 4000
+ front_right_steering_max: 4000
+
+ back_left_steering_max: 4095
+ back_right_steering_max: 4095
 
  joints:
   # Wheel Joints

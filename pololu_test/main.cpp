@@ -103,11 +103,22 @@ int main(int argc, const char * argv[])
     tcsetattr(fd, TCSANOW, &options);
 #endif
 
-    int feedback = jrkGetFeedback(fd);
-    printf("Current Feedback is %d.\n", feedback);
+	int count = 0;
+    int feedback = -1;
+	while (feedback == -1 && count++ < 10) {
+		feedback = jrkGetFeedback(fd);
+	}
+	
+	printf("Current Feedback is %d.\n", feedback);
 
-    int target = jrkGetTarget(fd);
-    printf("Current Target is %d.\n", target);
+    int target = -1;
+
+	count = 0;
+	while (feedback == -1 && count++ < 10) {
+		jrkGetTarget(fd);
+	}
+
+	printf("Current Target is %d.\n", target);
 
     int newTarget=speed; 
     printf("Setting Target to %d.\n", newTarget);
