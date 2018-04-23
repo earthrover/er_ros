@@ -68,7 +68,7 @@ class SteeringTransformNode(object):
         self.button_handlers[16] = self.run_in_place
 
         rospack = rospkg.RosPack()
-        dir = rospack.get_path('earth_rover_nagigation')
+        dir = rospack.get_path('earth_rover_navigation')
         
         self.nav_file_path = os.path.join(dir, "src", "client", "geo_wp.txt")
         
