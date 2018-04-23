@@ -1,0 +1,2 @@
+rosrun earth_rover_navigation nav_client
+

@@ -3,6 +3,7 @@ import os
 import subprocess
 from threading import Lock
 import rospy
+import rospkg
 from sensor_msgs.msg import NavSatFix
 
 from sensor_msgs.msg import Joy
@@ -11,6 +12,7 @@ from four_wheel_steering_msgs.msg import FourWheelSteering
 import navigation_api
 
 INPLACE_FILE = "/home/earth/catkin_ws/scripts/rotate_in_place.sh"
+WAYPOINT_FILE = "/home/earth/catkin_ws/earth-rover-ros/earth_rover_navigation/src/client/geo_wp.txt"
 
 mutex = Lock()
 
@@ -61,13 +63,14 @@ class SteeringTransformNode(object):
         self.button_handlers[7] = self.run_command_7
         self.button_handlers[13] = self.nav_clear
         self.button_handlers[14] = self.nav_reset
-        self.button_handlers[15] = self.nav_pause
+        # self.button_handlers[15] = self.nav_pause
         self.button_handlers[12] = self.nav_add
         self.button_handlers[16] = self.run_in_place
 
-        dir = os.path.dirname(__file__)
+        rospack = rospkg.RosPack()
+        dir = rospack.get_path('earth_rover_nagigation')
         
-        self.nav_file_path = os.path.join(dir, "geo_wp.txt")
+        self.nav_file_path = os.path.join(dir, "src", "client", "geo_wp.txt")
         
         topic = "/four_wheel_steering_controller/cmd_four_wheel_steering"
         message_type = FourWheelSteering
@@ -105,11 +108,11 @@ class SteeringTransformNode(object):
         subprocess.Popen(cmd, shell=True)
         
     def nav_start(self):
-        # self.send_waypoints()
+        self.send_waypoints()
         navigation_api.start()
-    
-    def nav_pause(self):
-        navigation_api.pause()
+    #
+    # def nav_pause(self):
+    #     navigation_api.pause()
         
     def nav_clear(self):
         navigation_api.pause()
@@ -123,31 +126,35 @@ class SteeringTransformNode(object):
         with open(self.nav_file_path, 'w') as f:
             f.write("Type: geo\n")
 
+
     def send_waypoints(self):
-    
-        if not os.path.exists(self.nav_file_path):
-            return
-            
-        cartesian = False
-            
-        with open(self.nav_file_path, 'r') as f:
-            for line in f.readlines():
-                if "Type" in line:
-                    if "cartesian" in line:
-                        cartesian = True
-                else:
-                    x, y, a = line.split(" ")
-                    if cartesian:
-                        navigation_api.add_waypoint_cartesian(float(x), float(y), float(a))
-                    else:
-                        navigation_api.add_waypoint(float(x), float(y), float(a))
+        cmd = "/home/earth/catkin_ws/scripts/send_waypoints.sh"
+        subprocess.Popen(cmd, shell=True)
+
+        #
+        # if not os.path.exists(self.nav_file_path):
+        #     return
+        #
+        # cartesian = False
+        #
+        # with open(self.nav_file_path, 'r') as f:
+        #     for line in f.readlines():
+        #         if "Type" in line:
+        #             if "cartesian" in line:
+        #                 cartesian = True
+        #         else:
+        #             x, y, a = line.split(" ")
+        #             if cartesian:
+        #                 navigation_api.add_waypoint_cartesian(float(x), float(y), float(a))
+        #             else:
+        #                 navigation_api.add_waypoint(float(x), float(y), float(a))
 
     def nav_add(self):
     
         if not os.path.exists(self.nav_file_path):
             with open(self.nav_file_path, 'a') as f:
                 f.write("Type: geo\n")
-        	    
+
         mutex.acquire()
         fix = self.state["fix"].copy()
         mutex.release()
@@ -170,7 +177,7 @@ class SteeringTransformNode(object):
             velocity = (joy.axes[12] - 1) * float(self.velocity_scale)
 #        rospy.loginfo("velocity: %s" % velocity)
         return velocity
-    	
+
     
     def get_crab(self, joy):
     
@@ -179,8 +186,8 @@ class SteeringTransformNode(object):
             return 0.0
         else:
             return crab
-        
-        
+
+
     def get_turn(self, joy):
         turn = joy.axes[2]/float(self.turn_scale)
         if self.inplace:
@@ -206,19 +213,19 @@ class SteeringTransformNode(object):
         abs_max = max(abs_front, abs_back)
         if abs_max > self.max_angle:
             front, back = self.get_angles_scaled(joy, self.max_angle/abs_max)
-        	
+
         return front, back
         
         
     def send_message(self, velocity, front, back):
     
         msg = FourWheelSteering(front_steering_angle=front,
-    	    rear_steering_angle=back,
-    	    front_steering_angle_velocity=self.angle_change_rate,
-    	    rear_steering_angle_velocity=self.angle_change_rate,
-    	    speed=velocity,
-    	    acceleration=self.acceleration,
-    	    jerk=self.jerk)
+            rear_steering_angle=back,
+            front_steering_angle_velocity=self.angle_change_rate,
+            rear_steering_angle_velocity=self.angle_change_rate,
+            speed=velocity,
+            acceleration=self.acceleration,
+            jerk=self.jerk)
     
         self.publisher.publish(msg)
         
@@ -241,6 +248,7 @@ class SteeringTransformNode(object):
         velocity = self.get_velocity(joy)
         front, back = self.get_angles(joy)
         self.send_message(velocity, front, back)
+
 
 def listener():
     global node
