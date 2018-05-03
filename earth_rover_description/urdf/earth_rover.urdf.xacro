@@ -79,6 +79,9 @@
 		<origin xyz="${base_x/2} 0 0" />
 	</joint>
 
+    <xacro:include filename="$(find earth_rover_description)/urdf/imu.xacro"/>
+    <xacro:include filename="$(find earth_rover_description)/urdf/gps.xacro"/>
+
 	<!-- gazebo tags -->
 	<gazebo>
 		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

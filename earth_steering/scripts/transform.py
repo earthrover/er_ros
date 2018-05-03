@@ -259,7 +259,7 @@ def listener():
 
     rospy.init_node('earth_steering', anonymous=True)
     rospy.Subscriber("joy", Joy, node)
-    rospy.Subscriber("/gps/fix", NavSatFix, fix_callback)
+    rospy.Subscriber("/earth_gps/fix", NavSatFix, fix_callback)
     rospy.spin()
 
 if __name__ == '__main__':

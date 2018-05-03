@@ -18,10 +18,10 @@ hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
 # Setup screens
 chdir /home/vagrant/Sites # All screens start in ~/Sites folder
 screen -t 'core' 0 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_core.sh"
-screen -t 'joy' 1 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_joy.sh 15"
-screen -t 'imu' 2 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh 15"
+screen -t 'joy' 1 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_joy.sh 25"
+screen -t 'imu' 2 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh 25"
 
-screen -t 'gps' 3 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/rtk_launch.sh 20"
+screen -t 'gps' 3 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/rtk_launch.sh 25"
 screen -t 'ntrip' 4 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh 40"
 screen -t 'pub' 5 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh 30"
 
@@ -29,10 +29,12 @@ screen -t 'jstest' 6 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-r
 screen -t 'display' 7 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_loop.sh 
 screen -t 'read' 8 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_read.sh
 
-screen -t 'robot' 9 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_robot_hardware.sh 15"
+screen -t 'robot' 9 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_robot_hardware.sh 25"
 
-#screen -t 'steer' 10 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering.sh 20
-#screen -t 'nav' 11 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_navigation.sh 20
+screen -t 'battery' 10 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_battery.sh 25"
+
+#screen -t 'steer' 10 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering.sh 25
+#screen -t 'nav' 11 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_navigation.sh 25
 
 # Switch to the workspace screen
 select 1

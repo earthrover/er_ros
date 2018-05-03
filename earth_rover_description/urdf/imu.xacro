@@ -9,11 +9,11 @@
 	-->
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
-    <child link="imu"/>
+    <child link="imu_bosch_link"/>
   </joint>
 
  <!-- Base Link -->
-  <link name="imu">
+  <link name="imu_bosch_link">
     <collision>
       <origin xyz="0 0 0.05" rpy="0 0 0"/>
       <geometry>
@@ -40,7 +40,7 @@
   </link>
 
 
- <gazebo reference="imu">
+ <gazebo reference="imu_bosch_link">
     <material>Gazebo/Orange</material>
   </gazebo>
 
