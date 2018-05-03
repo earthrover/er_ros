@@ -303,7 +303,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport 5900 -shared
+ExecStart=/usr/bin/x11vnc -xkb -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport 5900 -shared
 
 [Install]
 WantedBy=multi-user.target
@@ -574,7 +574,8 @@ rospack profile
 ###### Install locate
 ```
 sudo apt-get install mlocate
-'''
+```
+
 You can update ```locate``` with the command ```updatedb```
 
 Troubleshooting
@@ -658,7 +659,7 @@ Here is an example setup for your screen file:
 vim ~/.screenrc
 ```
 
-```
+``` 
 # Use bash
 shell /bin/bash
 
@@ -711,11 +712,11 @@ Run the python script /ntrip/client.py to stream differential gps data to the ub
 
 ## Indicator IP
 
+```
 sudo apt-add-repository ppa:bovender/bovender
 sudo apt-get update
 sudo apt-get install indicator-ip
 
-```
 indicator-ip --autostart
 ```
 
@@ -737,6 +738,7 @@ sudo msgfmt -o unity.mo /tmp/foo.po
 ```
 
 ## Have fun!
+
 
 ```
 ----------------------------------------------------------------------------------------------------
