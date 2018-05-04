@@ -12,7 +12,7 @@ class NavigationApi(object):
 
         self.start_service = rospy.ServiceProxy('/earth_rover_navigation/start_navigation', StartNavigation)
         self.pause_service = rospy.ServiceProxy('/earth_rover_navigation/pause_navigation', PauseNavigation)
-        self.cancel_service = rospy.ServiceProxy('/earth_rover_navigation/cancel_naviation', CancelNavigation)
+        self.cancel_service = rospy.ServiceProxy('/earth_rover_navigation/cancel_navigation', CancelNavigation)
         self.add_waypoint_service = rospy.ServiceProxy('/earth_rover_navigation/add_geo_waypoint', GeoWpSrv)
 
 
