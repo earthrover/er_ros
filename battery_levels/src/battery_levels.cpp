@@ -13,10 +13,12 @@ double cell_const[MAX_CELLS] = {1.0000, 2.1915, 2.6970,  4.1111,
                                 8.4667, 9.2353, 11.0000, 11.0000};
 
 int main(int argc, char **argv) {
+    printf("[TODO] BATTERY LEVELS \n");
+    /*
     ros::init(argc, argv, "battery_state");
 
     ros::NodeHandle nh;
-    
+
     sensor_msgs::BatteryState batt_state;
 
     ros::Publisher batteryState("battery_state", &batt_state);
@@ -59,6 +61,7 @@ int main(int argc, char **argv) {
         ros::spinOnce();
         r.sleep();
     }
+    */
 
     return 0;
 }
