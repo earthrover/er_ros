@@ -31,7 +31,7 @@ screen -t 'battery' 17  bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/ear
 
 screen -t 'imu' 12 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh 20"
 
-screen -t 'gps' 13 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/rtk_launch.sh 25"
+screen -t 'gps' 13 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_rtk.sh 25"
 #screen -t 'ntrip' 14 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh 40"
 #screen -t 'pub' 15 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh 30"
 
