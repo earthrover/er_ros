@@ -45,8 +45,8 @@ class SteeringTransformNode(object):
         self.button_handlers = 19 * [None]
         self.state = {}
         self.inplace = False
-        
-        
+
+
         self.velocity_scale = 0.5
         self.crab_scale = 0.7
         self.turn_scale = 0.7
@@ -55,7 +55,7 @@ class SteeringTransformNode(object):
         self.angle_change_rate = 0.5
         self.acceleration = 0.5
         self.jerk = 0.5
-        
+
         self.button_handlers[3] = self.nav_start
         self.button_handlers[4] = self.run_command_4
         self.button_handlers[5] = self.run_command_5
@@ -69,17 +69,17 @@ class SteeringTransformNode(object):
 
         rospack = rospkg.RosPack()
         dir = rospack.get_path('earth_rover_navigation')
-        
+
         self.nav_file_path = os.path.join(dir, "src", "client", "geo_wp.txt")
-        
+
         topic = "/four_wheel_steering_controller/cmd_four_wheel_steering"
         message_type = FourWheelSteering
-        
+
         self.publisher = rospy.Publisher(topic, message_type, queue_size=10)
-        
+
         navigation_api.init_api()
 
-        
+
     def time_delta(self, sec, nano):
         sec_delta = (sec - self.last_sec) * 1000000000
         nano_delta = nano - self.last_nano
@@ -106,14 +106,14 @@ class SteeringTransformNode(object):
         self.inplace = not os.path.exists(INPLACE_FILE)
         cmd = INPLACE_FILE
         subprocess.Popen(cmd, shell=True)
-        
+
     def nav_start(self):
         self.send_waypoints()
         navigation_api.start()
     #
     # def nav_pause(self):
     #     navigation_api.pause()
-        
+
     def nav_clear(self):
         navigation_api.pause()
         navigation_api.cancel()
@@ -129,7 +129,7 @@ class SteeringTransformNode(object):
 
     def send_waypoints(self):
         cmd = "/home/earth/catkin_ws/scripts/send_waypoints.sh"
-        subprocess.Popen(cmd, shell=True)
+        subprocess.call(cmd, shell=True)
 
         #
         # if not os.path.exists(self.nav_file_path):
@@ -150,7 +150,7 @@ class SteeringTransformNode(object):
         #                 navigation_api.add_waypoint(float(x), float(y), float(a))
 
     def nav_add(self):
-    
+
         if not os.path.exists(self.nav_file_path):
             with open(self.nav_file_path, 'a') as f:
                 f.write("Type: geo\n")
@@ -167,23 +167,23 @@ class SteeringTransformNode(object):
                 y = fix["lon"]
                 bearing = 0
                 f.write("%s %s %s\n" % (x, y, bearing))
-        
-  
-        
+
+
+
     def get_velocity(self, joy):
-    
+
         velocity = -(joy.axes[13] - 1) * float(self.velocity_scale)
         if velocity == 0.5:
             velocity = 0.0
-        
+
         if joy.axes[12] != 0 and joy.axes[12] < 1 :
             velocity = (joy.axes[12] - 1) * float(self.velocity_scale)
 #        rospy.loginfo("velocity: %s" % velocity)
         return velocity
 
-    
+
     def get_crab(self, joy):
-    
+
         crab = joy.axes[0]/float(self.crab_scale)
         if self.inplace:
             return 0.0
@@ -197,19 +197,19 @@ class SteeringTransformNode(object):
             return 0.0
         else:
             return turn
-        
-        
+
+
     def get_angles_scaled(self, joy, scale):
-    
+
         crab = self.get_crab(joy) * scale
         turn = self.get_turn(joy) * scale
         front = turn/2.0 + crab
         back = -turn/2.0 + crab
         return front, back
-    
-        
+
+
     def get_angles(self, joy):
-    
+
         front, back = self.get_angles_scaled(joy, 1.0)
         abs_front = abs(front)
         abs_back = abs(back)
@@ -218,10 +218,10 @@ class SteeringTransformNode(object):
             front, back = self.get_angles_scaled(joy, self.max_angle/abs_max)
 
         return front, back
-        
-        
+
+
     def send_message(self, velocity, front, back):
-    
+
         msg = FourWheelSteering(front_steering_angle=front,
             rear_steering_angle=back,
             front_steering_angle_velocity=self.angle_change_rate,
@@ -229,13 +229,13 @@ class SteeringTransformNode(object):
             speed=velocity,
             acceleration=self.acceleration,
             jerk=self.jerk)
-    
+
         self.publisher.publish(msg)
-        
-        
+
+
     def check_buttons(self, joy):
         for i, button_state in enumerate(joy.buttons):
-            
+
             if button_state == 1 and self.button_states[i] == 0:
                 handler = self.button_handlers[i]
                 print("pressed button %s" % i)
@@ -243,9 +243,9 @@ class SteeringTransformNode(object):
                     handler()
             self.button_states[i] = button_state
 
-  
+
     def __call__(self, joy):
-    
+
         self.check_buttons(joy)
 
         velocity = self.get_velocity(joy)
