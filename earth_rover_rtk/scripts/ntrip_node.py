@@ -59,7 +59,7 @@ class RtkNode(object):
         ntripArgs["position_callback"] = get_position
 
         ## start a subscriber to listen
-        rospy.Subscriber("/earth_gps/fix", NavSatFix, fix_callback)
+        rospy.Subscriber("/gps/fix", NavSatFix, fix_callback)
 
         run_client(ntripArgs, NTRIP_SERIAL_NAME)
 

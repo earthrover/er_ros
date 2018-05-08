@@ -51,7 +51,7 @@ class EarthRoverPublisherNode(object):
     def start(self):
         rospy.init_node('earth_rover_publisher', anonymous=True)
         ## start a subscriber to listen
-        rospy.Subscriber("/earth_gps/fix", NavSatFix, fix_callback)
+        rospy.Subscriber("/gps/fix", NavSatFix, fix_callback)
 
         while True:
             try:

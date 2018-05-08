@@ -18,9 +18,9 @@ hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
 # Setup screens
 chdir /home/vagrant/Sites # All screens start in ~/Sites folder
 
-screen -t 'steer' 10 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering.sh
-screen -t 'nav'  0 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_navigation.sh 10
-screen -t 'main' 1 bash
+screen -t 'steer' 10 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering.sh"
+screen -t 'nav'  0 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_navigation.sh 10"
+screen -t 'planner' 1 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_planner.sh 10"
 
 # Switch to the workspace screen
 select 1
