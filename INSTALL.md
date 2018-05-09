@@ -154,6 +154,11 @@ sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-co
 sudo apt-get -y install ros-kinetic-robot-localization
 ```
 
+Check if catkin_pkg is installed or install it
+```
+pip install catkin_pkg
+```
+
 Navigation specifics
 ```
 sudo apt-get -y install ros-kinetic-hector-gazebo-plugins
