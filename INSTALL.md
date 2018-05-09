@@ -188,6 +188,28 @@ sudo apt-get -y install libevent-pthreads-2.0-5
 sudo apt-get -y install python-pthreading
 ```
 
+#### ~/.bashrc and network setup
+
+This is an example of content inside the ~/.bashrc to define a master device
+```
+echo "Earth Rover Body Master"
+hostname -I
+export ROS_IP=192.168.0.50
+export ROS_HOSTNAME=earth-pi-ros
+export ROS_PARALLEL_JOBS=-j1
+export ROS_MASTER_URI=http://earth-pi-ros:11311/
+export DISPLAY=:0
+```
+
+Example for slave device
+```
+echo "Earth Rover Slave"
+hostname -I
+export ROS_HOSTNAME=rover-jetson-dev
+export ROS_MASTER_URI=http://earth-pi-ros:11311/
+export DISPLAY=:0
+```
+
 Service starter
 ------------------------
 
