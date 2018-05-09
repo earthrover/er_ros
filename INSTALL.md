@@ -654,7 +654,19 @@ Current Mac address of our PS3 controller:
 E0:AE:5E:3C:47:2D
 
 ## Navigation Stack
+
+To compile the navigation stack we require TooN
+
 [Tutorial](https://www.youtube.com/watch?v=HIK1KBw-Jn4)
+
+Install TooN 2.2
+https://github.com/ctuning/ck-math/tree/master/package/lib-toon-2.2
+
+[Direct Download](https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2)
+
+```
+./configure && make && sudo make install
+```
 
 * Creating the map
 
