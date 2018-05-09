@@ -157,6 +157,9 @@ sudo apt-get -y install ros-kinetic-robot-localization
 Check if catkin_pkg is installed or install it
 ```
 pip install catkin_pkg
+pip uninstall em
+pip install empy
+pip install pyyaml
 ```
 
 Navigation specifics
