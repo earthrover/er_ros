@@ -665,7 +665,22 @@ https://github.com/ctuning/ck-math/tree/master/package/lib-toon-2.2
 [Direct Download](https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2)
 
 ```
+cd ~/Downloads
+wget https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2
+tar xvf TooN-2.2.tar.bz2
+cd TooN-2.2.tar.bz2
 ./configure && make && sudo make install
+```
+
+Install Robohelper
+```
+cd ~/Downloads
+git clone https://github.com/jocacace/robohelper.git
+cd robohelper
+mkdir build && cd build
+cmake ..
+make
+sudo make install
 ```
 
 * Creating the map
