@@ -20,6 +20,8 @@ earth_rover_hardware:
 
  back_left_steering_max: 4095
  back_right_steering_max: 4095
+ 
+ publish_raw_feedback: false
 
  joints:
   # Wheel Joints
