@@ -606,7 +606,16 @@ rospack profile
 
 ## Extras
 
+###### Disable lockscreen
+
+We don't want the lock screen consuming resources, so we disable it.
+```
+export DISPLAY=:0
+gsettings set org.mate.screensaver lock-enabled false
+```
+
 ###### Install locate
+
 ```
 sudo apt-get install mlocate
 ```
