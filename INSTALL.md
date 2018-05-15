@@ -49,6 +49,23 @@ sudo service ssh start
 sudo service ssh status
 ```
 
+#### Install an editor
+```
+sudo apt-get -y install vim
+```
+
+#### Sudoers
+Sudo without password for earth user
+
+```
+sudo vim /etc/sudoers
+```
+
+Add at the bottom of the sudoers file and save
+```
+%earth ALL=(ALL) NOPASSWD:ALL
+```
+
 #### Install screen
 We use screen to launch processes and have access to their terminals
 later on
@@ -157,6 +174,11 @@ sudo apt-get -y install ros-kinetic-move-base ros-kinetic-move-base-msgs ros-kin
 sudo apt-get -y install ros-kinetic-robot-localization
 ```
 
+Install Pip
+```
+sudo apt-get -y install python-pip
+```
+
 Check if catkin_pkg is installed or install it
 ```
 pip install catkin_pkg
@@ -212,7 +234,6 @@ export DISPLAY=:0
 
 Service starter
 ------------------------
-
 
 ```
 earth@earth-pi-ros:~$ sudo vim /etc/init.d/ros_earth_rover
@@ -283,18 +304,6 @@ sudo vim /etc/samba/smb.conf
 ```
 sudo /etc/init.d/samba restart
 sudo smbpasswd -a earth
-```
-
-#### Sudoers
-Sudo without password for earth user
-
-```
-sudo vim /etc/sudoers
-```
-
-Add at the bottom of the sudoers file and save
-```
-%earth ALL=(ALL) NOPASSWD:ALL
 ```
 
 VNC 
