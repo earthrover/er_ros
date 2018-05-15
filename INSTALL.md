@@ -85,11 +85,13 @@ Disable printer services
 sudo systemctl disable cups-browsed.service
 ```
 
-###### Remove all libre office
+###### Remove all libre office and bloatware
 
 ```
 sudo apt-get -y remove --purge libreoffice*
 sudo apt-get -y purge --auto-remove scratch
+
+sudo dpkg --remove flashplugin-installer 
 
 sudo apt-get clean
 sudo apt-get autoremove
