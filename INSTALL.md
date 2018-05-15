@@ -479,6 +479,7 @@ GITHUB SETUP FOR DEVELOPERS
 git config --global user.name "Bob the Minion"
 git config --global user.email "bob@earthrover.cc"
 git config --global core.editor vim
+
 ```
 
 #### Setup your git certificate
@@ -486,6 +487,7 @@ git config --global core.editor vim
 
 ```
 ssh-keygen -t rsa -b 4096 -C "bob@earthrover.cc"
+
 ```
 
 #### Add the agent to our user boot
@@ -493,17 +495,20 @@ ssh-keygen -t rsa -b 4096 -C "bob@earthrover.cc"
 Add ssh agent to bashrc so it autostarts when a terminal is created
 ```
 vim ~/.bashrc
+
 ```
 
 Add to the bottom of the file
 ```
 eval $(ssh-agent -s) > /dev/null
+
 ```
 
 Add your credentials to ssh for the ssh client to find
 ```
 eval $(ssh-agent -s) 
 ssh-add ~/.ssh/id_rsa
+
 ```
 
 #### Add SSH key to github
@@ -513,6 +518,7 @@ Add your SSH to github and test
 
 ```
 ssh git@github.com
+
 ```
 
 Something like this should be your output
@@ -533,22 +539,26 @@ source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin_make
+
 ```
 
 Run this command to get the environment setup and check that you have the right package parameters
 ```
 source devel/setup.bash
 echo $ROS_PACKAGE_PATH
+
 ```
 
 #### Add our setup to our main bash so the user has this setup on start
 ```
 echo "source /home/earth/catkin_ws/devel/setup.bash" >> ~/.bashrc
+
 ```
 
 #### Clone earth rover repo
 ```
 cd ~/catkin_ws/src
+
 ```
 
 #### The repo lives at github here:
@@ -560,6 +570,7 @@ git clone git@github.com:earthrover/earth-rover-ros.git
 cd ~/catkin_ws/src/earth-rover-ros
 git submodule init
 git submodule update
+
 ```
 A result similar to this:
 ```
@@ -579,38 +590,45 @@ earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$
 ###### Create a sym link to scripts to speed up access to launchers
 ```
 ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s ~/catkin_ws/scripts
+
 ```
 
 Create Eclipse cmake format 
 ```
 cd ~/catkin_ws/
 ./scripts/catkin_eclipse.sh
+
 ```
 
 Enter your ROS workspace.
 ```
 cd ~/catkin_ws
+
 ```
 
 #### White list all the packages
 ```
 cd ~/catkin_ws
 catkin_make -DCATKIN_WHITELIST_PACKAGES="" -j1
+
 ```
 
 #### Build workspace
 ```
 earth@earth-pi-ros:~/catkin_ws$ catkin_make -j1
+
 ```
 
 ###### We don't have enough memory to run the -j4 compilation so we use -j1
 ```
 catkin_make -j1
+
 ```
 
 #### Check with rospack if we can build our packages 
 ```
 rospack profile
+
 ```
 
 ## Extras
@@ -621,12 +639,14 @@ We don't want the lock screen consuming resources, so we disable it.
 ```
 export DISPLAY=:0
 gsettings set org.mate.screensaver lock-enabled false
+
 ```
 
 ###### Install locate
 
 ```
 sudo apt-get install mlocate
+
 ```
 
 You can update ```locate``` with the command ```updatedb```
@@ -711,8 +731,9 @@ https://github.com/ctuning/ck-math/tree/master/package/lib-toon-2.2
 cd ~/Downloads
 wget https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2
 tar xvf TooN-2.2.tar.bz2
-cd TooN-2.2.tar.bz2
+cd TooN-2.2
 ./configure && make && sudo make install
+
 ```
 
 Install Robohelper
@@ -724,6 +745,7 @@ mkdir build && cd build
 cmake ..
 make
 sudo make install
+
 ```
 
 * Creating the map
@@ -737,6 +759,7 @@ We use Screen a lot.
 Here is an example setup for your screen file:
 ```
 vim ~/.screenrc
+
 ```
 
 ``` 
