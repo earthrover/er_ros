@@ -578,7 +578,7 @@ earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$
 
 ###### Create a sym link to scripts to speed up access to launchers
 ```
-ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s scripts
+ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s ~/catkin_ws/scripts
 ```
 
 Create Eclipse cmake format 
