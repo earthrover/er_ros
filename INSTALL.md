@@ -171,6 +171,7 @@ sudo apt-get -y install ros-kinetic-ros-control ros-kinetic-ros-controllers ros-
 sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-controllers ros-kinetic-position-controllers ros-kinetic-joy
 
 # Navigation packages
+sudo apt-get -y install ros-kinetic-navigation
 sudo apt-get -y install ros-kinetic-move-base ros-kinetic-move-base-msgs ros-kinetic-teb-local-planner ros-kinetic-teb-local-planner-tutorials
 
 sudo apt-get -y install ros-kinetic-robot-localization
