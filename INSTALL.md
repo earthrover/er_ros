@@ -174,6 +174,9 @@ sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-co
 sudo apt-get -y install ros-kinetic-move-base ros-kinetic-move-base-msgs ros-kinetic-teb-local-planner ros-kinetic-teb-local-planner-tutorials
 
 sudo apt-get -y install ros-kinetic-robot-localization
+
+# gazebo plugins
+sudo apt-get -y install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
 ```
 
 Install Pip
