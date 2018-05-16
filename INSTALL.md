@@ -176,7 +176,7 @@ sudo apt-get -y install ros-kinetic-move-base ros-kinetic-move-base-msgs ros-kin
 sudo apt-get -y install ros-kinetic-robot-localization
 
 # gazebo plugins
-sudo apt-get -y install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
+sudo apt-get -y install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control ros-kinetic-hector-gazebo-plugins
 ```
 
 Install Pip
@@ -192,10 +192,6 @@ pip install empy
 pip install pyyaml
 ```
 
-Navigation specifics
-```
-sudo apt-get -y install ros-kinetic-hector-gazebo-plugins
-```
 
 Add kinetic to your setup (Check if it is correct)
 ```
