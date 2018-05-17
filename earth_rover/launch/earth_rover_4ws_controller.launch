@@ -1,33 +1,22 @@
 <?xml version="1.0" ?>
-
 <launch>
 
-  <!-- Load the joystick -->
-  <arg name="joy_config" default="ps3" />
-  <arg name="joy_dev" default="/dev/input/js0" />
-  
-  <node pkg="joy" type="joy_node" name="joy_node">
-    <param name="dev" value="$(arg joy_dev)" />
-    <param name="deadzone" value="0.05" />
-    <param name="coalesce_interval" value="0.1" />
-  </node>
+    <!-- Load the joystick -->
+    <arg name="joy_config" default="ps3" />
+    <arg name="joy_dev" default="/dev/input/js0" />
 
-	<node pkg="earth_steering" name="earth_steering" type="transform.py" output="screen">
-	
-	</node>
+    <node pkg="joy" type="joy_node" name="joy_node">
+        <param name="dev" value="$(arg joy_dev)" />
+        <param name="deadzone" value="0.05" />
+        <param name="coalesce_interval" value="0.1" />
+    </node>
 
-	<rosparam file="$(find earth_rover)/config/earth_rover_4w_control.yaml" command="load"/>
-	
-	<!-- Load the controllers -->
-	<node name="controller_spawner" pkg="controller_manager" type="spawner" args="four_wheel_steering_controller --shutdown-timeout 3"/>
-	
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="earth_steering" name="earth_steering" type="transform.py" output="screen">
+    </node>
 
-	<!-- Convert joint states to TF transforms -->
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" respawn="true" output="screen">
-	    <!-- <remap from="/joint_states" to="/earth_rover/joint_states" /> -->
-	</node>
-	
-	
-	
+    <rosparam file="$(find earth_rover)/config/earth_rover_4w_control.yaml" command="load"/>
+
+    <!-- Load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="four_wheel_steering_controller --shutdown-timeout 3"/>
+
 </launch>

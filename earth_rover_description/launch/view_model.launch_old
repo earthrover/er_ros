@@ -5,7 +5,5 @@
 	<include file="$(find earth_rover_description)/launch/description.launch" />
 
 	<param name="use_gui" value="$(arg gui)" />
-	<!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
-
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>
