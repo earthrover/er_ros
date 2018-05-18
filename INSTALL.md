@@ -49,6 +49,23 @@ sudo service ssh start
 sudo service ssh status
 ```
 
+#### Install an editor
+```
+sudo apt-get -y install vim
+```
+
+#### Sudoers
+Sudo without password for earth user
+
+```
+sudo vim /etc/sudoers
+```
+
+Add at the bottom of the sudoers file and save
+```
+%earth ALL=(ALL) NOPASSWD:ALL
+```
+
 #### Install screen
 We use screen to launch processes and have access to their terminals
 later on
@@ -68,11 +85,13 @@ Disable printer services
 sudo systemctl disable cups-browsed.service
 ```
 
-###### Remove all libre office
+###### Remove all libre office and bloatware
 
 ```
 sudo apt-get -y remove --purge libreoffice*
 sudo apt-get -y purge --auto-remove scratch
+
+sudo dpkg --remove flashplugin-installer 
 
 sudo apt-get clean
 sudo apt-get autoremove
@@ -152,9 +171,18 @@ sudo apt-get -y install ros-kinetic-ros-control ros-kinetic-ros-controllers ros-
 sudo apt-get -y install ros-kinetic-joint-state-controller ros-kinetic-effort-controllers ros-kinetic-position-controllers ros-kinetic-joy
 
 # Navigation packages
+sudo apt-get -y install ros-kinetic-navigation
 sudo apt-get -y install ros-kinetic-move-base ros-kinetic-move-base-msgs ros-kinetic-teb-local-planner ros-kinetic-teb-local-planner-tutorials
 
 sudo apt-get -y install ros-kinetic-robot-localization
+
+# gazebo plugins
+sudo apt-get -y install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control ros-kinetic-hector-gazebo-plugins
+```
+
+Install Pip
+```
+sudo apt-get -y install python-pip
 ```
 
 Check if catkin_pkg is installed or install it
@@ -165,10 +193,6 @@ pip install empy
 pip install pyyaml
 ```
 
-Navigation specifics
-```
-sudo apt-get -y install ros-kinetic-hector-gazebo-plugins
-```
 
 Add kinetic to your setup (Check if it is correct)
 ```
@@ -212,7 +236,6 @@ export DISPLAY=:0
 
 Service starter
 ------------------------
-
 
 ```
 earth@earth-pi-ros:~$ sudo vim /etc/init.d/ros_earth_rover
@@ -285,18 +308,6 @@ sudo /etc/init.d/samba restart
 sudo smbpasswd -a earth
 ```
 
-#### Sudoers
-Sudo without password for earth user
-
-```
-sudo vim /etc/sudoers
-```
-
-Add at the bottom of the sudoers file and save
-```
-%earth ALL=(ALL) NOPASSWD:ALL
-```
-
 VNC 
 ------------------------
 
@@ -356,109 +367,7 @@ sudo shutdown -r now
 ```
 
 or Install VNC4SERVER if you would like to have more than one display terminals
-
-#### Install Vnc and GNOME minimal
-```
-sudo apt-get -y install vnc4server
-sudo apt-get -y install gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-themes-ubuntu
-```
-
-Create file
-
-```
-sudo vim /etc/init.d/vncserver
-```
-
-Create the service launcher
-```
-#!/bin/sh -e
-## BEGIN INIT INFO
-# Provides:          vncserver
-# Required-Start:    networking
-# Required-Stop:
-# Default-Start:     3 4 5
-# Default-Stop:      0 6
-## END INIT INFO
-PATH="$PATH:/usr/X11R6/bin/"
-
-# The Username:Group that will run VNC
-export USER="nvidia"
-#${RUNAS}
-
-# The display that VNC will use
-DISPLAY="1"
-
-# Color depth (between 8 and 32)
-DEPTH="16"
-
-# The Desktop geometry to use.
-#GEOMETRY="<WIDTH>x<HEIGHT>"
-#GEOMETRY="800x600"
-GEOMETRY="1280x768"
-#GEOMETRY="1920x1080"
-
-# The name that the VNC Desktop will have.
-NAME="my-vnc-server"
-
-OPTIONS="-name ${NAME} -depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY}"
-
-. /lib/lsb/init-functions
-
-case "$1" in
-        start)
-                log_action_begin_msg "Starting vncserver for user '${USER}' on localhost:${DISPLAY}"
-                su ${USER} -c "/usr/bin/vncserver ${OPTIONS}"
-        ;;
-
-        stop)
-                log_action_begin_msg "Stoping vncserver for user '${USER}' on localhost:${DISPLAY}"
-                su ${USER} -c "/usr/bin/vncserver -kill :${DISPLAY}"
-        ;;
-
-        restart)
-                $0 stop
-                $0 start
-        ;;
-esac
-
-exit 0
-```
-
-Make it executable
-```
-sudo chmod +x /etc/init.d/vncserver
-```
-
-Edit the user xstartup
-```
-mkdir .vnc
-vim ~/.vnc/xstartup
-```
-
-```
-#!/bin/sh
-
-export XKL_XMODMAP_DISABLE=1
-unset SESSION_MANAGER
-unset DBUS_SESSION_BUS_ADDRESS
-
-[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
-[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
-xsetroot -solid grey
-vncconfig -iconic &
-
-gnome-panel &
-gnome-settings-daemon &
-metacity &
-nautilus &
-gnome-terminal &
-xterm &
-```
-
-```
-sudo update-rc.d vncserver defaults
-sudo update-rc.d vncserver enable
-```
+(Instructions removed. Blame this file to find them)
 
 GITHUB SETUP FOR DEVELOPERS
 ---------------------------
@@ -470,6 +379,7 @@ GITHUB SETUP FOR DEVELOPERS
 git config --global user.name "Bob the Minion"
 git config --global user.email "bob@earthrover.cc"
 git config --global core.editor vim
+
 ```
 
 #### Setup your git certificate
@@ -477,6 +387,7 @@ git config --global core.editor vim
 
 ```
 ssh-keygen -t rsa -b 4096 -C "bob@earthrover.cc"
+
 ```
 
 #### Add the agent to our user boot
@@ -484,17 +395,20 @@ ssh-keygen -t rsa -b 4096 -C "bob@earthrover.cc"
 Add ssh agent to bashrc so it autostarts when a terminal is created
 ```
 vim ~/.bashrc
+
 ```
 
 Add to the bottom of the file
 ```
 eval $(ssh-agent -s) > /dev/null
+
 ```
 
 Add your credentials to ssh for the ssh client to find
 ```
 eval $(ssh-agent -s) 
 ssh-add ~/.ssh/id_rsa
+
 ```
 
 #### Add SSH key to github
@@ -504,6 +418,7 @@ Add your SSH to github and test
 
 ```
 ssh git@github.com
+
 ```
 
 Something like this should be your output
@@ -524,22 +439,26 @@ source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin_make
+
 ```
 
 Run this command to get the environment setup and check that you have the right package parameters
 ```
 source devel/setup.bash
 echo $ROS_PACKAGE_PATH
+
 ```
 
 #### Add our setup to our main bash so the user has this setup on start
 ```
 echo "source /home/earth/catkin_ws/devel/setup.bash" >> ~/.bashrc
+
 ```
 
 #### Clone earth rover repo
 ```
 cd ~/catkin_ws/src
+
 ```
 
 #### The repo lives at github here:
@@ -551,6 +470,7 @@ git clone git@github.com:earthrover/earth-rover-ros.git
 cd ~/catkin_ws/src/earth-rover-ros
 git submodule init
 git submodule update
+
 ```
 A result similar to this:
 ```
@@ -569,39 +489,46 @@ earth@earth-pi-ros:~/catkin_ws/src/earth-rover-ros$
 
 ###### Create a sym link to scripts to speed up access to launchers
 ```
-ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s scripts
+ln ~/catkin_ws/src/earth-rover-ros/scripts/ -s ~/catkin_ws/scripts
+
 ```
 
 Create Eclipse cmake format 
 ```
 cd ~/catkin_ws/
 ./scripts/catkin_eclipse.sh
+
 ```
 
 Enter your ROS workspace.
 ```
 cd ~/catkin_ws
+
 ```
 
 #### White list all the packages
 ```
 cd ~/catkin_ws
 catkin_make -DCATKIN_WHITELIST_PACKAGES="" -j1
+
 ```
 
 #### Build workspace
 ```
 earth@earth-pi-ros:~/catkin_ws$ catkin_make -j1
+
 ```
 
 ###### We don't have enough memory to run the -j4 compilation so we use -j1
 ```
 catkin_make -j1
+
 ```
 
 #### Check with rospack if we can build our packages 
 ```
 rospack profile
+
 ```
 
 ## Extras
@@ -612,12 +539,14 @@ We don't want the lock screen consuming resources, so we disable it.
 ```
 export DISPLAY=:0
 gsettings set org.mate.screensaver lock-enabled false
+
 ```
 
 ###### Install locate
 
 ```
 sudo apt-get install mlocate
+
 ```
 
 You can update ```locate``` with the command ```updatedb```
@@ -702,8 +631,9 @@ https://github.com/ctuning/ck-math/tree/master/package/lib-toon-2.2
 cd ~/Downloads
 wget https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2
 tar xvf TooN-2.2.tar.bz2
-cd TooN-2.2.tar.bz2
+cd TooN-2.2
 ./configure && make && sudo make install
+
 ```
 
 Install Robohelper
@@ -715,6 +645,7 @@ mkdir build && cd build
 cmake ..
 make
 sudo make install
+
 ```
 
 * Creating the map
@@ -728,6 +659,7 @@ We use Screen a lot.
 Here is an example setup for your screen file:
 ```
 vim ~/.screenrc
+
 ```
 
 ``` 

@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 <launch>
+
     <include file="$(find earth_rover)/launch/earth_rover_localization.launch" />
     <include file="$(find earth_rover)/launch/teb_planner/earth_rover_planner.launch" />
     <node name="earth_rover_nav" pkg="earth_rover_navigation" type="earth_rover_nav" output="screen" />
+
 </launch>

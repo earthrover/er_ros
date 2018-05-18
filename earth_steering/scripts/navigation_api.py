@@ -14,7 +14,7 @@ class NavigationApi(object):
 
     def __init__(self):
 
-        self.start_service = rospy.ServiceProxy('/earth_rover_navigation/start_naviagion', srv.start_navigation)
+        self.start_service = rospy.ServiceProxy('/earth_rover_navigation/start_navigation', srv.start_navigation)
         self.pause_service = rospy.ServiceProxy('/earth_rover_navigation/pause_navigation', srv.pause_navigation)
         self.cancel_service = rospy.ServiceProxy('/earth_rover_navigation/cancel_navigation', srv.cancel_navigation)
         self.add_waypoint_service = rospy.ServiceProxy('/earth_rover_navigation/add_geo_waypoint', srv.geo_wp_srv)
@@ -33,7 +33,7 @@ def pause():
 
 def cancel():
     api.cancel_service()
-    
+
 def add_waypoint_cartesian(x, y, bearing):
     position = Point(x=x, y=y)
     east = math.sin(math.radians(bearing))
