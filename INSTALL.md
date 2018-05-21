@@ -276,6 +276,12 @@ sudo systemctl enable ros_earth_rover
 Development tools
 ------------------------
 
+To build using the eclipse build system use the script build.sh
+Add an alias to your .bashrc to use it if you want:
+```
+alias b='~/catkin_ws/src/earth_rover_ros/scripts/build.sh'
+```
+
 #### Install editors
 ```
 sudo apt-get -y install vim astyle
