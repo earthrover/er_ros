@@ -279,7 +279,7 @@ Development tools
 To build using the eclipse build system use the script build.sh
 Add an alias to your .bashrc to use it if you want:
 ```
-alias b='~/catkin_ws/src/earth_rover_ros/scripts/build.sh'
+alias b='~/catkin_ws/src/earth-rover-ros/scripts/build.sh'
 ```
 
 #### Install editors
