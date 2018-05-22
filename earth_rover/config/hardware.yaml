@@ -24,6 +24,7 @@ earth_rover_hardware:
 # publish_raw_feedback: false
 
  publish_raw_feedback: true
+ publish_feedback_rate: 10
 
  joints:
   # Wheel Joints
