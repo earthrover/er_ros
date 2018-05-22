@@ -15,7 +15,7 @@
     <param name="coalesce_interval" value="0.1" />
   </node>
 
-  <node pkg="earth_steering" name="earth_steering" type="transform.py" output="screen">
+  <node pkg="earth_steering" name="earth_steering" type="joypad.py" output="screen">
   </node>
 
 	

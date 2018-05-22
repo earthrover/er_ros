@@ -49,21 +49,29 @@ void base2steering::fws_ctrl() {
 	ros::Rate r(5);
 	
 	four_wheel_steering_msgs::FourWheelSteering fws_ctrl_msg;
-  fws_ctrl_msg.acceleration = 0.5;
-  fws_ctrl_msg.jerk = 0.5;
+    fws_ctrl_msg.acceleration = 0.5;
+    fws_ctrl_msg.jerk = 0.5;
+    std::string steering_mode;
+    std::string steering_joypad ("joypad");
 
 	while(ros::ok()) {
-		
-		fws_ctrl_msg.speed = _x_vel*_max_x_vel;
-		float delta = domega_to_delta( _x_vel, _t_vel, _wheelbase );
-		delta = ( fabs(delta) > _delta_max ) ? ( delta < 0 ) ? -_delta_max : _delta_max : delta;
-		
-		fws_ctrl_msg.front_steering_angle = delta;
-		fws_ctrl_msg.rear_steering_angle = -delta;
 
-		_4ws_vel.publish( fws_ctrl_msg );
+        // this acts as a guard to block sending if there is a steering mode and it's set to "joypad"
+	    if (ros::param::get("/steering_mode", steering_mode)){
+	        if(steering_mode.compare(steering_joypad) == 0){
+                r.sleep();
+                continue;
+	        }
+        }
 
+        fws_ctrl_msg.speed = _x_vel*_max_x_vel;
+        float delta = domega_to_delta( _x_vel, _t_vel, _wheelbase );
+        delta = ( fabs(delta) > _delta_max ) ? ( delta < 0 ) ? -_delta_max : _delta_max : delta;
 
+        fws_ctrl_msg.front_steering_angle = delta;
+        fws_ctrl_msg.rear_steering_angle = -delta;
+
+        _4ws_vel.publish( fws_ctrl_msg );
 
 		r.sleep();
 	}
