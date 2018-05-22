@@ -1,0 +1,1 @@
+roslaunch earth_rover gazebo_test.launch
