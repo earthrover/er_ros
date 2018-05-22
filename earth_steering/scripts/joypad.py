@@ -114,11 +114,11 @@ class SteeringTransformNode(object):
 
     def set_mode_joypad(self):
         self.mode = "joypad"
-        rospy.set_param_raw("/steering_mode", "joypad")
+        rospy.set_param("/steering_mode", "joypad")
 
     def set_mode_auto(self):
         self.mode = "auto"
-        rospy.set_param_raw("/steering_mode", "auto")
+        rospy.set_param("/steering_mode", "auto")
 
 
     def nav_start(self):
