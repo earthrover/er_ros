@@ -122,6 +122,7 @@ class SteeringTransformNode(object):
 
 
     def nav_start(self):
+        self.set_mode_auto()
         self.send_waypoints()
         navigation_api.start()
     #
@@ -129,10 +130,12 @@ class SteeringTransformNode(object):
     #     navigation_api.pause()
 
     def nav_clear(self):
+        self.set_mode_joypad()
         navigation_api.pause()
         navigation_api.cancel()
 
     def nav_reset(self):
+        self.set_mode_joypad()
         navigation_api.pause()
         navigation_api.cancel()
         if os.path.exists(self.nav_file_path):
