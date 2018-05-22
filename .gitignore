@@ -19,6 +19,9 @@ simulation/sensor_sim_gazebo/CMakeFiles
 simulation/sensor_sim_gazebo/Makefile
 simulation/sensor_sim_gazebo/catkin_generated
 
+bosch_imu_driver/Makefile
+battery_levels/Makefile
+
 earth_rover/Makefile
 earth_steering/Makefile
 earth_*/Makefile
