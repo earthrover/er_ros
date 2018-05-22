@@ -3,30 +3,37 @@
 	url = git@github.com:earthrover/jrk_hardware.git
 [submodule "teleop_twist_joy"]
 	path = teleop_twist_joy
-	url = git@github.com:RALSpaceASG/teleop_twist_joy.git
+    url = git@github.com:RALSpaceASG/teleop_twist_joy.git
+    ignore = untracked
 [submodule "twist_mux"]
 	path = twist_mux
-	url = https://github.com/ros-teleop/twist_mux
+    url = https://github.com/ros-teleop/twist_mux
+    ignore = untracked
 [submodule "serial"]
 	path = serial
 	url = git@github.com:wjwwood/serial.git
-
+    ignore = untracked
 [submodule "earth_rover_navigation"]
 	path = earth_rover_navigation
 	url = git@github.com:earthrover/earth_rover_navigation.git
 
 [submodule "ublox"]
 	path = ublox
-	url = git@github.com:earthrover/ublox.git
+    url = git@github.com:earthrover/ublox.git
+    ignore = untracked    
 [submodule "zed-ros-wrapper"]
 	path = zed-ros-wrapper
-	url = git@github.com:earthrover/zed-ros-wrapper.git
+    url = git@github.com:earthrover/zed-ros-wrapper.git
+    ignore = untracked
 [submodule "four_wheel_steering_msgs"]
 	path = four_wheel_steering_msgs
-	url = git@github.com:ros-drivers/four_wheel_steering_msgs.git
+    url = git@github.com:ros-drivers/four_wheel_steering_msgs.git
+    ignore = untracked    
 [submodule "urdf_geometry_parser"]
 	path = urdf_geometry_parser
-	url = git@github.com:ros-controls/urdf_geometry_parser.git
+    url = git@github.com:ros-controls/urdf_geometry_parser.git
+    ignore = untracked
 [submodule "control_toolbox"]
 	path = control_toolbox
-	url = git@github.com:ros-controls/control_toolbox.git
+    url = git@github.com:ros-controls/control_toolbox.git
+    ignore = untracked
