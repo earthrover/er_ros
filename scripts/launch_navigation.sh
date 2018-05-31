@@ -4,7 +4,7 @@ d=$(date)
 echo "NAVIGATION $d"
 echo "NAVIGATION" > /home/earth/display.txt
 
-#sleep 60
+sleep $1
 
 while true; do
         echo "NAVIGATION" > /home/earth/display.txt

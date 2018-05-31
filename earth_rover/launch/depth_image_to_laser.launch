@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+    <!--- Depth image to laser scan -->
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" >
+        <param name="scan_height" value="3"/> 
+        <param name="output_frame_id" value="base_link"/>
+        <remap from="image" to="zed/depth/depth_registered" />
+    </node>
+
+    <!-- Maping Node -->
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping_node" output="screen" > 
+        <remap from="odom" to="/gmapping/odom" />
+    </node>
+
+</launch>
+
