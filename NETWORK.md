@@ -7,7 +7,7 @@ Documentation of how the internal network is setup in the Earth Rover UGV.
 
 Our current router is "Earth Rover Demo"
 We use a normal router with a DHCP on the range of 192.168.1.200+
-Our machines have fix ips on this network 
+Our machines have fixed ips on this network 
 
 ## PI 
 
