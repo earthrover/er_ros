@@ -9,10 +9,5 @@
         <remap from="image" to="zed/depth/depth_registered" />
     </node>
 
-    <!-- Maping Node -->
-    <node pkg="gmapping" type="slam_gmapping" name="gmapping_node" output="screen" > 
-        <remap from="odom" to="/gmapping/odom" />
-    </node>
-
 </launch>
 
