@@ -55,6 +55,13 @@ Now check the network section where wi-fi will be connected to the created hotsp
 
 ## JETSON - EARTH ROVER - ROS
 
+#### Installation
+
+We have to make our iptables persistent so we can load and save them
+```
+sudo apt-get install iptables-persistent
+```
+
 #### SSH TUNNEL
 
 We have to add Gateway forwarding functionality into our ubuntu 
