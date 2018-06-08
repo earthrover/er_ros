@@ -87,4 +87,5 @@ Fixed 192.168.0.25
 #### ETHERNET PORT 2
 Undefined, it will forward into the network
 
-
+#### GATEWAY SETUP
+[https://www.homenetworkhelp.info/articles-install-simple-network-gateway/](How to setup a Gateway)
