@@ -96,3 +96,13 @@ Undefined, it will forward into the network
 
 #### GATEWAY SETUP
 [https://www.homenetworkhelp.info/articles-install-simple-network-gateway/](How to setup a Gateway)
+
+#### UTILS
+
+##### Connect to a wifi network from terminal
+```ifconfig wlan0```
+
+```iwconfig wlan0 essid name key password```
+Note: If you want to type the ASCII password, you would use iwconfig wlan0 essid name key s:password.
+
+```dhclient wlan0```
