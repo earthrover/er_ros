@@ -1,11 +1,3 @@
 #!/bin/bash
+ssh earth@192.168.0.25 sh /home/earth/catkin_ws/scripts/rotate_in_place_jetson.sh
 
-FILE=~/rotate.txt
-
-if [ -f $FILE ]; then
-	echo "DELETE ROTATE"
-	rm $FILE
-else
-	echo "ROTATE!"
-	touch $FILE
-fi

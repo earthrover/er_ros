@@ -1,20 +1,31 @@
+<?xml version="1.0" ?>
+
 <launch>
 
-  <!-- Load Earth Rover Hardware Configuration -->
-  <rosparam file="$(find earth_rover)/config/hardware.yaml" command="load"/>
-  
-  <!--
-  <include file="$(find ankle_publisher)/launch/ankle_publisher_launch.launch"/>
-  -->
-  
-  <!-- Load Earth Rover Description -->
-  <include file="$(find earth_rover_description)/launch/description.launch"/>
+    <!-- Load Earth Rover Hardware Configuration -->
+    <rosparam file="$(find earth_rover)/config/hardware.yaml" command="load"/>
 
-  <!-- Robot Hardware Interface -->
-  <node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node" output="screen" respawn="true" />
+    <include file="$(find ankle_publisher)/launch/ankle_publisher_launch.launch"/>
 
-  <!--
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find four_wheel_steering_controller)/test/config/view_odom.rviz"/>
-  -->
+    <!-- Load Earth Rover Description -->
+    <include file="$(find earth_rover_description)/launch/description.launch"/>
+
+    <!-- Robot Hardware Interface -->
+    <node name="earth_rover_hardware" pkg="jrk_hardware" type="jrk_hardware_node" output="screen" respawn="true" />
+
+    <!--
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find four_wheel_steering_controller)/test/config/view_odom.rviz"/>
+    -->
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">["/jrk_hardware/joints_raw_feedback"]</rosparam>
+        <param name="publish_frequency" value="10.0"/>
+        <param name="/use_gui" value="False"/>
+    </node>
+
+    <!-- Convert joint states to TF transforms -->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" respawn="true" output="screen">
+        <param name="publish_frequency" value="5.0"/>
+    </node>
 
 </launch>

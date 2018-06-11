@@ -1,0 +1,33 @@
+
+# Use bash
+shell /bin/bash
+
+autodetach on
+
+# Big scrollback
+defscrollback 5000
+
+# No annoying startup message
+startup_message off
+
+# Display the status line at the bottom
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
+
+# Setup screens
+chdir /home/vagrant/Sites # All screens start in ~/Sites folder
+screen -t 'joy' 1 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_joy.sh 25"
+
+screen -t 'ssh' 2 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/ssh_pi_tunnel.sh"
+
+
+# Switch to the workspace screen
+select 1
+
+vbell off
+bell_msg ""
+
+# termcapinfo xterm ti@:te@
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007:ti@:te@'
+

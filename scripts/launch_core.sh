@@ -3,6 +3,7 @@
 d=$(date)
 echo "LAUNCH ROSCORE $d"
 echo "LAUNCH CORE" > /home/earth/display.txt
+rm /home/earth/.ros/log/* -rfv
 
 while true; do
         echo "EARTH CORE" > /home/earth/display.txt

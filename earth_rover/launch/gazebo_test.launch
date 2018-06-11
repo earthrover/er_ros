@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+  <include file="$(find earth_steering)/launch/earth_steering.launch" />
+  <include file="$(find earth_rover)/launch/earth_rover_joypad_control.launch" />
+  <include file="$(find earth_rover)/launch/earth_rover_localization_gazebo.launch" />
+  <include file="$(find earth_rover)/launch/teb_planner/earth_rover_planner_ui.launch" />
+
+</launch>

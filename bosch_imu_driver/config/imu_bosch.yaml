@@ -1,0 +1,8 @@
+# USB port
+port: /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0 
+# Tf frame id
+frame_id: imu_bosch_link
+# Data reading frequency
+freqency: 200
+# Sensor operation mode --> modes could be found in sensor datasheet
+operation_mode: 0x08

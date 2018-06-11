@@ -12,7 +12,6 @@
 
     <node pkg="tf" type="static_transform_publisher" name="gps_tf" args="0 0 0 0 0 0 /base_link /gps 100"/>
 <!--
-   <node pkg="tf" type="static_transform_publisher" name="imu_tf" args="0 0 0 0 1.57 0 /base_link /imu_bosch_link 100"/> 
+   <node pkg="tf" type="static_transform_publisher" name="imu_tf" args="0 0 0 0 1.57 0 /base_link /imu_bosch_link 100"/>
 -->
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
 </launch>

@@ -12,7 +12,7 @@ from four_wheel_steering_msgs.msg import FourWheelSteering
 import navigation_api
 
 INPLACE_FILE = "/home/earth/catkin_ws/scripts/rotate_in_place.sh"
-WAYPOINT_FILE = "/home/earth/catkin_ws/earth-rover-ros/earth_rover_navigation/src/client/geo_wp.txt"
+# WAYPOINT_FILE = "/home/earth/catkin_ws/earth-rover-ros/earth_rover_navigation/src/client/geo_wp.txt"
 
 mutex = Lock()
 
@@ -45,6 +45,7 @@ class SteeringTransformNode(object):
         self.button_handlers = 19 * [None]
         self.state = {}
         self.inplace = False
+        self.mode = "auto"
 
 
         self.velocity_scale = 0.5
@@ -57,7 +58,7 @@ class SteeringTransformNode(object):
         self.jerk = 0.5
 
         self.button_handlers[3] = self.nav_start
-        self.button_handlers[4] = self.run_command_4
+        self.button_handlers[4] = self.toggle_mode
         self.button_handlers[5] = self.run_command_5
         self.button_handlers[6] = self.run_command_6
         self.button_handlers[7] = self.run_command_7
@@ -69,14 +70,12 @@ class SteeringTransformNode(object):
 
         rospack = rospkg.RosPack()
         dir = rospack.get_path('earth_rover_navigation')
-
         self.nav_file_path = os.path.join(dir, "src", "client", "geo_wp.txt")
 
         topic = "/four_wheel_steering_controller/cmd_four_wheel_steering"
         message_type = FourWheelSteering
 
         self.publisher = rospy.Publisher(topic, message_type, queue_size=10)
-
         navigation_api.init_api()
 
 
@@ -85,9 +84,9 @@ class SteeringTransformNode(object):
         nano_delta = nano - self.last_nano
         return sec_delta + nano_delta
 
-    def run_command_4(self):
-        cmd = "/home/earth/catkin_ws/scripts/joy_cmd_1.sh"
-        subprocess.Popen(cmd, shell=True)
+    # def run_command_4(self):
+    #     cmd = "/home/earth/catkin_ws/scripts/joy_cmd_1.sh"
+    #     subprocess.Popen(cmd, shell=True)
 
     def run_command_5(self):
 
@@ -107,7 +106,23 @@ class SteeringTransformNode(object):
         cmd = INPLACE_FILE
         subprocess.Popen(cmd, shell=True)
 
+    def toggle_mode(self):
+        if self.mode == "auto":
+            self.set_mode_joypad()
+        else:
+            self.set_mode_auto()
+
+    def set_mode_joypad(self):
+        self.mode = "joypad"
+        rospy.set_param("/steering_mode", "joypad")
+
+    def set_mode_auto(self):
+        self.mode = "auto"
+        rospy.set_param("/steering_mode", "auto")
+
+
     def nav_start(self):
+        self.set_mode_auto()
         self.send_waypoints()
         navigation_api.start()
     #
@@ -115,10 +130,12 @@ class SteeringTransformNode(object):
     #     navigation_api.pause()
 
     def nav_clear(self):
+        self.set_mode_joypad()
         navigation_api.pause()
         navigation_api.cancel()
 
     def nav_reset(self):
+        self.set_mode_joypad()
         navigation_api.pause()
         navigation_api.cancel()
         if os.path.exists(self.nav_file_path):
@@ -248,18 +265,19 @@ class SteeringTransformNode(object):
 
         self.check_buttons(joy)
 
-        velocity = self.get_velocity(joy)
-        front, back = self.get_angles(joy)
-        self.send_message(velocity, front, back)
+        if self.mode == "joypad":
+            velocity = self.get_velocity(joy)
+            front, back = self.get_angles(joy)
+            self.send_message(velocity, front, back)
 
 
 def listener():
     global node
     node = SteeringTransformNode()
 
-    rospy.init_node('earth_steering', anonymous=True)
+    rospy.init_node('earth_joypad_steering', anonymous=True)
     rospy.Subscriber("joy", Joy, node)
-    rospy.Subscriber("/gps/fix", NavSatFix, fix_callback)
+    rospy.Subscriber("/earth_gps/fix", NavSatFix, fix_callback)
     rospy.spin()
 
 if __name__ == '__main__':
