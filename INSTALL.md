@@ -49,6 +49,11 @@ sudo service ssh start
 sudo service ssh status
 ```
 
+AutoSSH to create tunnels
+```
+sudo apt-get install autossh
+```
+
 #### Install an editor
 ```
 sudo apt-get -y install vim
