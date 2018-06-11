@@ -659,7 +659,7 @@ sudo make install
 Depth Image vision from ZED Mini to populate the planner
 
 ```
-sudo apt-get install -y  ros-kinetic-gmapping ros-kinetic-openslam-gmapping ros-kinetic-depthimage_to_laserscan
+sudo apt-get install -y  ros-kinetic-gmapping ros-kinetic-openslam-gmapping ros-kinetic-depthimage-to-laserscan
 ```
 
 New launcher for depthimage:
