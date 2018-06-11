@@ -1,0 +1,22 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides: ros_earth_rover
+# Required-Start: $network
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Launches the earth rover services on the Jetson 
+### END INIT INFO
+
+case $1 in
+     start)
+       # Launch ros script with screen 
+       su - earth -c "screen -dmS ros -c /home/earth/catkin_ws/src/earth-rover-ros/scripts/.ros.jetson.launch.rc -t earth_rover bash"
+       ;;
+     stop)
+        kill -s 15 `pidof screen`
+        ;;
+esac
+exit 0
+
