@@ -49,6 +49,11 @@ sudo service ssh start
 sudo service ssh status
 ```
 
+AutoSSH to create tunnels
+```
+sudo apt-get install autossh
+```
+
 #### Install an editor
 ```
 sudo apt-get -y install vim
@@ -275,6 +280,12 @@ sudo systemctl enable ros_earth_rover
 
 Development tools
 ------------------------
+
+To build using the eclipse build system use the script build.sh
+Add an alias to your .bashrc to use it if you want:
+```
+alias b='~/catkin_ws/src/earth-rover-ros/scripts/build.sh'
+```
 
 #### Install editors
 ```
@@ -649,6 +660,29 @@ sudo make install
 ```
 
 * Creating the map
+
+Depth Image vision from ZED Mini to populate the planner
+
+```
+sudo apt-get install -y  ros-kinetic-gmapping ros-kinetic-openslam-gmapping ros-kinetic-depthimage-to-laserscan
+```
+
+New launcher for depthimage:
+```
+<launch>
+    <!--- Depth image to laser scan -->
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" >
+        <param name="scan_height" value="3"/> 
+        <param name="output_frame_id" value="base_link"/>
+        <remap from="image" to="camera/depth/image_rect_color" />
+    </node>
+
+    <!-- Maping Node -->
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping_node" output="screen" >
+        <remap from="odom" to="your/odom/topic" />
+    </node>
+</launch>
+```
 
 * Saving the map
 
