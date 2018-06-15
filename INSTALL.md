@@ -517,6 +517,20 @@ cd ~/catkin_ws
 
 ```
 
+## Zed Camera installation
+https://www.stereolabs.com/developers/release/2.4/
+
+Tegra Installation
+```
+cd ~/Downloads
+wget https://cdn.stereolabs.com/developers/downloads/ZED_SDK_Linux_JTX2_JP3.2_v2.4.0.run
+chmod +x ZED_SDK_Linux_JTX2_JP3.2_v2.4.0.run
+./ZED_SDK_Linux_JTX2_JP3.2_v2.4.0.run
+
+cd ~/catkin_ws/src
+git clone https://github.com/stereolabs/zed-ros-wrapper/
+```
+
 ## Navigation Stack
 
 To compile the navigation stack we require TooN
