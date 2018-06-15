@@ -517,6 +517,48 @@ cd ~/catkin_ws
 
 ```
 
+## Navigation Stack
+
+To compile the navigation stack we require TooN
+
+[Tutorial](https://www.youtube.com/watch?v=HIK1KBw-Jn4)
+
+Install TooN 2.2
+https://github.com/ctuning/ck-math/tree/master/package/lib-toon-2.2
+
+[Direct Download](https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2)
+
+```
+cd ~/Downloads
+wget https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2
+tar xvf TooN-2.2.tar.bz2
+cd TooN-2.2
+./configure && make && sudo make install
+
+```
+
+Install Robohelper
+```
+cd ~/Downloads
+git clone https://github.com/jocacace/robohelper.git
+cd robohelper
+mkdir build && cd build
+cmake ..
+make
+sudo make install
+
+```
+
+* Creating the map
+
+Depth Image vision from ZED Mini to populate the planner
+
+```
+sudo apt-get install -y  ros-kinetic-gmapping ros-kinetic-openslam-gmapping ros-kinetic-depthimage-to-laserscan
+```
+
+[TODO]
+
 #### White list all the packages
 ```
 cd ~/catkin_ws
@@ -627,65 +669,6 @@ bluetoothctl
 Current Mac address of our PS3 controller:
 E0:AE:5E:3C:47:2D
 
-## Navigation Stack
-
-To compile the navigation stack we require TooN
-
-[Tutorial](https://www.youtube.com/watch?v=HIK1KBw-Jn4)
-
-Install TooN 2.2
-https://github.com/ctuning/ck-math/tree/master/package/lib-toon-2.2
-
-[Direct Download](https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2)
-
-```
-cd ~/Downloads
-wget https://github.com/ctuning/ck-math/raw/master/package/lib-toon-2.2/TooN-2.2.tar.bz2
-tar xvf TooN-2.2.tar.bz2
-cd TooN-2.2
-./configure && make && sudo make install
-
-```
-
-Install Robohelper
-```
-cd ~/Downloads
-git clone https://github.com/jocacace/robohelper.git
-cd robohelper
-mkdir build && cd build
-cmake ..
-make
-sudo make install
-
-```
-
-* Creating the map
-
-Depth Image vision from ZED Mini to populate the planner
-
-```
-sudo apt-get install -y  ros-kinetic-gmapping ros-kinetic-openslam-gmapping ros-kinetic-depthimage-to-laserscan
-```
-
-New launcher for depthimage:
-```
-<launch>
-    <!--- Depth image to laser scan -->
-    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" >
-        <param name="scan_height" value="3"/> 
-        <param name="output_frame_id" value="base_link"/>
-        <remap from="image" to="camera/depth/image_rect_color" />
-    </node>
-
-    <!-- Maping Node -->
-    <node pkg="gmapping" type="slam_gmapping" name="gmapping_node" output="screen" >
-        <remap from="odom" to="your/odom/topic" />
-    </node>
-</launch>
-```
-
-* Saving the map
-
 ### Screen setup
 
 We use Screen a lot. 
@@ -773,6 +756,26 @@ msgstr "Earth Rover - Network Name"
 cd /usr/share/locale/en/LC_MESSAGES
 sudo msgfmt -o unity.mo /tmp/foo.po
 ```
+
+## Depth Image to laser
+
+New launcher for depthimage:
+```
+<launch>
+    <!--- Depth image to laser scan -->
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" >
+        <param name="scan_height" value="3"/> 
+        <param name="output_frame_id" value="base_link"/>
+        <remap from="image" to="camera/depth/image_rect_color" />
+    </node>
+
+    <!-- Maping Node -->
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping_node" output="screen" >
+        <remap from="odom" to="your/odom/topic" />
+    </node>
+</launch>
+```
+
 
 ## Have fun!
 
