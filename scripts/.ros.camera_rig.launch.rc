@@ -1,0 +1,42 @@
+
+# Use bash
+shell /bin/bash
+
+autodetach on
+
+# Big scrollback
+defscrollback 5000
+
+# No annoying startup message
+startup_message off
+
+# Display the status line at the bottom
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
+
+# Setup screens
+chdir /home/vagrant/Sites # All screens start in ~/Sites folder
+
+screen -t 'core' 0 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_core.sh"
+screen -t 'imu' 2 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh 15"
+
+screen -t 'gps' 3 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_rtk.sh 15"
+screen -t 'ntrip' 4 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh 40"
+#screen -t 'pub' 5 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh 30"
+
+screen -t 'ssh' 7 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/ssh_tunnel.sh
+
+screen -t 'ipc_gps' 8 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_camera_service.sh 30"
+
+#screen -t 'zed' 11 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_zed.sh 25"
+
+# Switch to the workspace screen
+select 1
+
+vbell off
+bell_msg ""
+
+# termcapinfo xterm ti@:te@
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007:ti@:te@'
+

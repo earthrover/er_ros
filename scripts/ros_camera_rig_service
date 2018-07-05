@@ -1,0 +1,22 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides: ros_camera_rig_service
+# Required-Start: $network
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: ensure ros daemons are started (nmbd and smbd)
+### END INIT INFO
+
+case $1 in
+     start)
+       # Launch ros script with screen 
+       su - earth -c "screen -dmS ros -c /home/earth/catkin_ws/src/earth-rover-ros/scripts/.ros.camera_rig.launch.rc -t earth_rover bash"
+       ;;
+     stop)
+        kill -s 15 `pidof screen`
+        ;;
+esac
+exit 0
+
