@@ -37,3 +37,6 @@
 	path = control_toolbox
     url = git@github.com:ros-controls/control_toolbox.git
     ignore = untracked
+[submodule "tools/cp210x-program"]
+	path = tools/cp210x-program
+	url = https://github.com/VCTLabs/cp210x-program
