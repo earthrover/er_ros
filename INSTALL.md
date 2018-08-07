@@ -734,6 +734,7 @@ sudo apt-get install python-pip
 
 Then install pyserial:
 pip install pyserial
+pip install pyrebase
 
 ### Config
 configure server to use and serial device in /ntrip/config.py
