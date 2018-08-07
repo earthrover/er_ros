@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Simulate a carlike robot with the teb_local_planner in stage:
   - stage
   - map_server
@@ -8,8 +8,6 @@
   - rviz view
  -->
 <launch>
-
-	  <!--  **************** Visualisation ****************  -->
-	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find earth_rover)/config/visualization_navigation.rviz"/>
-
+  <!--  **************** Visualisation ****************  -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find earth_rover)/config/visualization_navigation.rviz"/>
 </launch>
