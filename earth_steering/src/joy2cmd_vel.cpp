@@ -31,12 +31,12 @@ int main( int argc, char** argv ) {
 	while( ros::ok() ) {
 
 		cmd_vel.linear.x = x_vel;
-		cmd_vel.angular.z = t_vel;	
+		cmd_vel.angular.z = t_vel;
 		cmd_vel_pub.publish ( cmd_vel );
-		 
+
 		ros::spinOnce();
 		r.sleep();
-	}	
+	}
 
 
 	return 0;

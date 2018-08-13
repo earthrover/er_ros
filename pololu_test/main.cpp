@@ -51,6 +51,8 @@ int jrkGetTarget(int fd)
 // Sets the jrk's Target variable (0-4095).
 int jrkSetTarget(int fd, unsigned short target)
 {
+    printf(" SET TARGET %d ", target);
+
     unsigned char command[] = {0xC0 + (target & 0x1F), (target >> 5) & 0x7F};
     if (write(fd, command, sizeof(command)) == -1)
     {
@@ -70,7 +72,7 @@ int main(int argc, const char * argv[])
     }
 
     // Open the Jrk's virtual COM port.
-    const char * device = "\\\\.\\USBSER000";  // Windows, "\\\\.\\COM6" also works
+    const char * device = "/dev/serial/by-id/usb-Arduino__www.arduino.cc__Arduino_Mega_2560_740343130393511152C0-if00";  // Windows, "\\\\.\\COM6" also works
     //const char * device = "/dev/ttyACM0";  // Linux
     //const char * device = "/dev/cu.usbmodem00000041"; // Mac OS X
 
@@ -106,7 +108,7 @@ int main(int argc, const char * argv[])
 	int count = 0;
     int feedback = -1;
 	while (feedback == -1 && count++ < 10) {
-		feedback = jrkGetFeedback(fd);
+//		feedback = jrkGetFeedback(fd);
 	}
 	
 	printf("Current Feedback is %d.\n", feedback);
@@ -115,7 +117,7 @@ int main(int argc, const char * argv[])
 
 	count = 0;
 	while (feedback == -1 && count++ < 10) {
-		jrkGetTarget(fd);
+//		jrkGetTarget(fd);
 	}
 
 	printf("Current Target is %d.\n", target);
@@ -123,6 +125,10 @@ int main(int argc, const char * argv[])
     int newTarget=speed; 
     printf("Setting Target to %d.\n", newTarget);
     jrkSetTarget(fd, newTarget);
+    jrkSetTarget(fd, newTarget);
+    jrkSetTarget(fd, newTarget);
+    jrkSetTarget(fd, newTarget);
+
 
     close(fd);
     return 0;

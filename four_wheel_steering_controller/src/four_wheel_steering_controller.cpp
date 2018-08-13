@@ -210,13 +210,8 @@ namespace four_wheel_steering_controller{
 
 		setOdomPubFields(root_nh, controller_nh);
 
-		printf("----------- VelocityJointInterface -------------\n");
 		hardware_interface::VelocityJointInterface *const vel_joint_hw = robot_hw->get<hardware_interface::VelocityJointInterface>();
-		printf("+ Velocity Interface 0x%p \n", &vel_joint_hw);
-
-		printf("----------- PositionJointInterface -------------\n");
 		hardware_interface::PositionJointInterface *const pos_joint_hw = robot_hw->get<hardware_interface::PositionJointInterface>();
-		printf("+ Position Interface 0x%p \n", &pos_joint_hw);
 
 		// Get the joint object to use in the realtime loop
 		for (int i = 0; i < front_wheel_joints_.size(); ++i)
