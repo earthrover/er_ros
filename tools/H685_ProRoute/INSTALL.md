@@ -7,6 +7,15 @@ We use as our main data service the H685 router from Pro Route
 
 ![Operation mode](h685_operation_mode.png "Operation Mode")
 
+![Mobile Settings](h685_mobile.png "Mobile Settings")
+
+![Failover](h685_failover.png "Failover Mode")
+
+![Wifi settings](h685_wifi_config_2.png "Wifi settings")
+
+![Wifi settings](h685_wifi_config.png "Wifi settings")
+
+![Interfaces](h685_interfaces.png "Interfaces")
 
 ## Have fun!
 
