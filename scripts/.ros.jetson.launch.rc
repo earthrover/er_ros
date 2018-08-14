@@ -23,11 +23,11 @@ screen -t 'robot' 1 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-r
 screen -t 'imu' 2 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_imu.sh 15"
 
 
-#screen -t 'gps' 3 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_rtk.sh 15"
-#screen -t 'ntrip' 4 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh 40"
-#screen -t 'pub' 5 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh 30"
+screen -t 'gps' 3 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_rtk.sh 15"
+screen -t 'ntrip' 4 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_gps_correction.sh 40"
+screen -t 'pub' 5 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_publisher.sh 30"
 
-screen -t 'display' 6 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_loop.sh
+#screen -t 'display' 6 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/display_loop.sh
 screen -t 'ssh' 7 bash --rcfile .bashrc -ci /home/earth/catkin_ws/src/earth-rover-ros/scripts/ssh_tunnel.sh
 
 screen -t 'steer' 8  bash --rcfile .bashrc -ci "/home/earth/catkin_ws/src/earth-rover-ros/scripts/launch_steering.sh 25"
