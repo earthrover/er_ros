@@ -53,6 +53,57 @@ Now check the network section where wi-fi will be connected to the created hotsp
 
 [Source](http://ubuntuhandbook.org/index.php/2014/09/3-ways-create-wifi-hotspot-ubuntu/)
 
+#### DUCKING JETSON HOTSPOT
+
+Obviously... on the jetson things would not be this easy... why would they?
+
+[Tutorial](https://devtalk.nvidia.com/default/topic/1010353/jetson-tx2/tx2-as-a-wifi-hotspot-/)
+
+```
+For those of you who is looking for a bridging solution.
+My working configuration is as follows
+
+1) echo 2 > /sys/module/bcmdhd/parameters/op_mode OR echo -e "options bcmdhd op_mode=2\n" >> /etc/modprobe.d/bcmdhd.conf
+
+2) install create_ap script from here https://github.com/oblique/create_ap
+
+3) prepare network interfaces side
+/etc/network/interfaces:
+...
+source interfaces.d/wlan0
+source interfaces.d/br0
+
+/etc/network/interfaces.d/br0:
+auto br0
+iface br0 inet static
+address 192.168.100.10
+netmask 255.255.255.0
+gateway 192.168.100.1
+bridge_ports eth0 wlan0
+
+/etc/network/interfaces.d/wlan0:
+auto wlan0
+iface wlan0 inet manual
+
+4) If you have DHCP server on your 192.168.100.0/24 LAN do nothing or you should set up your own on TX2:
+/etc/dnsmasq.conf :
+...
+interface=lo,br0
+no-dhcp-interface=lo
+dhcp-range=192.168.100.101,192.168.100.110,255.255.255.0,12h
+...
+and make sure dnsmasq starts when br0 is ready - 
+/lib/systemd/system/dnsmasq.service:
+[Unit]
+Description=dnsmasq - A lightweight DHCP and caching DNS server
+Requires=network.target
+After=network-online.target
+Wants=network-online.target
+
+5) start create_ap as a srevice or manually, something like 
+create_ap --no-virt -w 2 -m bridge wlan0 br0 Jetson-TX2 <YourSecret>
+```
+  
 ## JETSON - EARTH ROVER - ROS
 
 #### Installation
