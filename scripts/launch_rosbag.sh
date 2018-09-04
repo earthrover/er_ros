@@ -17,6 +17,13 @@ export ROS_PARALLEL_JOBS=-j4
 export ROS_MASTER_URI=http://rover_002:11311/
 export DISPLAY=:0
 
-cd /home/earth/Desktop/data
-/opt/ros/kinetic/bin/rosbag record --duration=59s -a
+cd /home/earth/Desktop/
+
+timestamp=$(date +%s)
+
+echo $timestamp " Create Bag" >> /home/earth/Desktop/data/capture.log.txt
+
+/opt/ros/kinetic/bin/rosbag record --duration=58s -a
+
+echo $timestamp " End Bag" >> /home/earth/Desktop/data/capture.log.txt
 #$SHELL

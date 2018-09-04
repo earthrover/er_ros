@@ -1,7 +1,7 @@
 ## Trimble NTRIP server settings
 
 ntrip:
-  user : "PH:1234"
+  user : "ROVER001:1234"
   caster: "www.vrsnow.co.uk"
   port = : 2101
   mountpoint : "15_TVN_RTCM_32"
