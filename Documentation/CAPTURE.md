@@ -59,6 +59,45 @@ Use the ros bag inspector from Intel to explore the raw meta data
 
 ![LibrealsenseRosBag](rosbag_realsense.jpg)
 
+Our Librealsense metadata contains JSON metadata companion files.
+The capturing framerate is faster than the GPS position framerate, therefore not every frame contains extra metadata.
+
+```
+earth@rover_002:~/data/8799ecf/180904_133002$ cat frame_0833.json
+{
+    "altitude": 48.876,
+    "ang_vel": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0011111111111111111
+    },
+    "frame": 833,
+    "latitude": 53.427129199999996,
+    "linear_acel": {
+        "x": 0.001,
+        "y": 0.002,
+        "z": -0.003
+    },
+    "longitude": -0.9160134,
+    "magnetic_field": {
+        "x": 15.5,
+        "y": 71.1875,
+        "z": 26.25
+    },
+    "orientation": {
+        "w": 0.994140625,
+        "x": 0.03076171875,
+        "y": 0.10369873046875,
+        "z": 0.00250244140625
+    },
+    "seq": 183,
+    "service": 3,
+    "stamp_nsecs": 332028,
+    "stamp_secs": 1536067860,
+    "status": 0
+```
+If you need more detailed metadata, the best is to open the companion rosbag which has all the raw metadata and more topics, this is just a simple digested summary of the topics which we were interested at the time of capture.
+
 ### Go Pro data
 We use two camaras - Hero 5 and Hero 6
 
