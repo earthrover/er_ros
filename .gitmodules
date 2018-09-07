@@ -43,3 +43,6 @@
 [submodule "tools/tx-utils"]
 	path = tools/tx-utils
 	url = https://github.com/FindHao/tx-utils.git
+[submodule "tools/gopro-utils"]
+	path = tools/gopro-utils
+	url = https://github.com/stilldavid/gopro-utils

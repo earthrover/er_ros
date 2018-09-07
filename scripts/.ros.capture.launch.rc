@@ -16,7 +16,7 @@ hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
 
 # Setup screens
 chdir /home/earth/Desktop
-screen -t 'camera' 0 bash --rcfile .bashrc -ci "/home/earth/Desktop/er-record-playback" 
+screen -t 'camera' 0 bash --rcfile .bashrc -ci "/home/earth/Desktop/er-record-playback 2>> /home/earth/Desktop/data/capture.log.txt" 
 
 chdir /home/earth/Desktop/data
 screen -t 'rosbag' 1 bash --rcfile .bashrc -ci "/home/earth/catkin_ws/scripts/launch_rosbag.sh"
